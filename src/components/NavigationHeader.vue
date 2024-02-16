@@ -2,9 +2,9 @@
     <header v-show="!mobile" :class="{ 'scroll-nav': scrollPosition }">
         <nav>
             <img alt="DTT Logo" class="logo" src="@/assets/dtt-logo.png" width="50" />
-            <ul v-show="!mobile" class="navigation">
-                <li><router-link class="link" :to="{ name: ' houses' }">Houses</router-link></li>
-                <li><router-link class="link" :to="{ name: 'about' }">About</router-link></li>
+            <ul class="navigation">
+                <li><router-link class="link" to="/">Houses</router-link></li>
+                <li><router-link class="link" to="/about">About</router-link></li>
             </ul>
         </nav>
     </header>
@@ -68,6 +68,7 @@ header {
     z-index: 100;
     width: 100%;
     position: fixed;
+    top: 0;
     transition: all 0.5s ease;
     padding: 0.5rem;
     color: white;
@@ -132,24 +133,6 @@ li {
 .nav-links {
     display: flex;
     gap: 1rem;
-}
-
-.icon {
-    display: flex;
-    top: 0;
-    align-items: center;
-    position: absolute;
-    right: 24px;
-    height: 48px;
-    width: 48px;
-    cursor: pointer;
-    border: 1px solid red;
-}
-
-.fas fa-bars {
-    font-size: 1.5rem;
-    background-color: black;
-    cursor: pointer;
 }
 </style>
 

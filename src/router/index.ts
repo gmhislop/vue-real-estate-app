@@ -1,20 +1,14 @@
-import Vue from 'vue';
-import {createRouter, createWebHashHistory}  from 'vue-router';
+import { createRouter, createWebHashHistory } from 'vue-router';
+import Home from '@/pages/Home.vue';
+import About from '@/pages/About.vue';
 
-const Home = { template: '<div>Home</div>' }
-const About = { template: '<div>About</div>' }
+const EditPage = { template: '<div>EditPage</div>' };
 
-const routes = [
-  { path: '/', component: Home },
-  { path: '/about', component: About },
-]
-
-const router = createRouter({
+export const router = createRouter({
   history: createWebHashHistory(),
-  routes,
-})
-
-const app = Vue.createApp({})
-app.use(router)
-
-app.mount('#app')
+  routes: [
+    { path: '/', component: Home },
+    { path: '/about', component: About },
+    { path: '/edit/:id', component: EditPage, props: true },
+  ],
+});

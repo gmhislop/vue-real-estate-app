@@ -5,7 +5,12 @@ import NavBar from './components/NavigationHeader.vue';
 <template>
   <div class="app">
     <nav-bar />
+    <router-view></router-view>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.app {
+  padding-top: 3rem;
+}
+</style>
