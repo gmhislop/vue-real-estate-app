@@ -21,8 +21,10 @@
                             <span>100m²</span>
                         </div>
                         <div class="button-container">
-                            <button @click="confirmDelete">E</button>
-                            <button @click="confirmDelete">D</button>
+                            <button @click="confirmDelete"><img src="@/assets/ic_delete@3x.png" class="icons"
+                                    alt="Edit" /></button>
+                            <button @click="confirmDelete"><img src="@/assets/ic_edit@3x.png" class="icons"
+                                    alt="Delete" /></button>
                         </div>
                     </div>
                 </div>
@@ -38,8 +40,10 @@
                             <span>100m²</span>
                         </div>
                         <div class="button-container">
-                            <button @click="confirmDelete">E</button>
-                            <button @click="confirmDelete">D</button>
+                            <button @click="confirmDelete"><img src="@/assets/ic_delete@3x.png" class="icons"
+                                    alt="Edit" /></button>
+                            <button @click="confirmDelete"><img src="@/assets/ic_edit@3x.png" class="icons"
+                                    alt="Delete" /></button>
                         </div>
                     </div>
                 </div>
@@ -55,8 +59,10 @@
                             <span>100m²</span>
                         </div>
                         <div class="button-container">
-                            <button @click="confirmDelete">E</button>
-                            <button @click="confirmDelete">D</button>
+                            <button @click="confirmDelete"><img src="@/assets/ic_delete@3x.png" class="icons"
+                                    alt="Edit" /></button>
+                            <button @click="confirmDelete"><img src="@/assets/ic_edit@3x.png" class="icons"
+                                    alt="Delete" /></button>
                         </div>
                     </div>
                 </div>
@@ -93,7 +99,7 @@ export default {
     flex-wrap: wrap;
     border-radius: 8px;
     gap: 1rem;
-    background-color: red;
+    background-color: white;
     width: 75%;
     padding: 1rem;
 }
@@ -147,6 +153,16 @@ h2 {
     border: none;
     padding: 0.5rem 1.25rem;
     border-radius: 8px;
+    cursor: pointer;
+}
+
+.icons {
+    width: 1rem;
+}
+
+button {
+    background-color: transparent;
+    border: none;
     cursor: pointer;
 }
 </style>
