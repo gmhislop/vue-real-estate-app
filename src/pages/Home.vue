@@ -3,69 +3,13 @@
         <div v-if="shouldShowEmptyState">
             <EmptyState />
         </div>
-        <div v-else class="card-container-flex">
+        <div v-else class="content">
             <div class="title-container">
                 <h2>Houses</h2>
-                <button class='createButton' @click="confirmDelete">+ CREATE NEW</button>
+                <button class="createButton" @click="createNew">+ CREATE NEW</button>
             </div>
-            <div class="card-container-flex">
-                <div class="card-container">
-                    <img class='house-image' src="https://via.placeholder.com/150" alt="Placeholder" />
-                    <div class="info-container">
-                        <h2>1234 Main St</h2>
-                        <p>$500.000</p>
-                        <p>12345 City</p>
-                        <div class="info">
-                            <span>BA</span>
-                            <span>BR</span>
-                            <span>100m²</span>
-                        </div>
-                        <div class="button-container">
-                            <button @click="confirmDelete"><img src="@/assets/ic_delete@3x.png" class="icons"
-                                    alt="Edit" /></button>
-                            <button @click="confirmDelete"><img src="@/assets/ic_edit@3x.png" class="icons"
-                                    alt="Delete" /></button>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-container">
-                    <img class='house-image' src="https://via.placeholder.com/150" alt="Placeholder" />
-                    <div class="info-container">
-                        <h2>1234 Main St</h2>
-                        <p>$500.000</p>
-                        <p>12345 City</p>
-                        <div class="info">
-                            <span>BA</span>
-                            <span>BR</span>
-                            <span>100m²</span>
-                        </div>
-                        <div class="button-container">
-                            <button @click="confirmDelete"><img src="@/assets/ic_delete@3x.png" class="icons"
-                                    alt="Edit" /></button>
-                            <button @click="confirmDelete"><img src="@/assets/ic_edit@3x.png" class="icons"
-                                    alt="Delete" /></button>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-container">
-                    <img class='house-image' src="https://via.placeholder.com/150" alt="Placeholder" />
-                    <div class="info-container">
-                        <h2>1234 Main St</h2>
-                        <p>$500.000</p>
-                        <p>12345 City</p>
-                        <div class="info">
-                            <span>BA</span>
-                            <span>BR</span>
-                            <span>100m²</span>
-                        </div>
-                        <div class="button-container">
-                            <button @click="confirmDelete"><img src="@/assets/ic_delete@3x.png" class="icons"
-                                    alt="Edit" /></button>
-                            <button @click="confirmDelete"><img src="@/assets/ic_edit@3x.png" class="icons"
-                                    alt="Delete" /></button>
-                        </div>
-                    </div>
-                </div>
+            <div class="card-container">
+                <Card v-for="(house, index) in houses" :key="index" :house="house" />
             </div>
         </div>
     </div>
@@ -73,11 +17,31 @@
   
 <script>
 import EmptyState from '@/components/EmptyState.vue';
+import Card from '@/components/Card.vue';
 
 export default {
     name: 'Home',
     components: {
-        EmptyState
+        EmptyState,
+        Card
+    },
+    data() {
+        return {
+            shouldShowEmptyState: false,
+            houses: [ // Dummy data for houses
+                { address: '1234 Main St', price: '$500.000', city: '12345 City', bathroom: 2, bedroom: 3, area: 100, image: 'https://via.placeholder.com/150' },
+                { address: '5678 Elm St', price: '$600.000', city: '56789 Town', bathroom: 3, bedroom: 4, area: 120, image: 'https://via.placeholder.com/150' },
+                { address: '91011 Oak St', price: '$700.000', city: '9101112 Village', bathroom: 3, bedroom: 5, area: 150, image: 'https://via.placeholder.com/150' }
+            ]
+        };
+    },
+    methods: {
+        confirmDelete() {
+            // Method logic for confirming deletion
+        },
+        createNew() {
+            // Method logic for creating new house
+        }
     }
 };
 </script>
@@ -86,54 +50,25 @@ export default {
 .home {
     display: flex;
     width: 100%;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100%;
     padding: 1rem 0;
 }
 
-.card-container {
-    display: flex;
-    position: relative;
-    flex-wrap: wrap;
-    border-radius: 8px;
-    gap: 1rem;
-    background-color: white;
-    width: 75%;
-    padding: 1rem;
-}
-
-.house-image {
-    border-radius: 8px;
-}
-
-.info {
-    display: flex;
-    gap: 1rem;
-}
-
-.info-container {
+.content {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-    padding: 1rem 0;
-}
-
-.button-container {
-    display: flex;
-    position: absolute;
-    right: 1rem;
-    top: 1rem;
-    gap: 0.5rem;
-}
-
-.card-container-flex {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
+    align-items: center;
     justify-content: center;
-    width: 100%;
+    height: 100%;
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 8px;
+    width: 75%;
 }
 
 .title-container {
@@ -153,16 +88,6 @@ h2 {
     border: none;
     padding: 0.5rem 1.25rem;
     border-radius: 8px;
-    cursor: pointer;
-}
-
-.icons {
-    width: 1rem;
-}
-
-button {
-    background-color: transparent;
-    border: none;
     cursor: pointer;
 }
 </style>
