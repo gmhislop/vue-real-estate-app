@@ -1,18 +1,47 @@
 <template>
     <div class="card-container">
         <img class="house-image" :src="house.image" :alt="house.address" />
-        <div class="info-container">
-            <h2>{{ house.address }}</h2>
-            <p>{{ house.price }}</p>
-            <p>{{ house.city }}</p>
-            <div class="info">
-                <span class="propertie-text"><img src="@/assets/ic_bed@3x.png" class="properties" alt="bed" />{{
-                    house.bedroom }}</span>
-                <span class="propertie-text"><img src="@/assets/ic_bath@3x.png" class="properties" alt="bath" />{{
-                    house.bathroom }}</span>
-                <span class="propertie-text"><img src="@/assets/ic_size@3x.png" class="properties" alt="size" />{{
-                    house.area }} m²</span>
+        <div class="detail-container">
+            <div class="details">
+                <h2>{{ house.address }}</h2>
+                <div v-if="fullDetails">
+                    <div class="fullDetails">
+                        <h3>{{ house.street }}</h3>
+                    </div>
+                    <div class="fullDetails">
+                        <span class="properties-text"><img src="@/assets/ic_price@3x.png" class="propertiess"
+                                alt="price" />{{
+                                    house.price }}</span>
+                        <span class="properties-text"><img src="@/assets/ic_size@3x.png" class="propertiess" alt="size" />{{
+                            house.area }} m²</span>
+                        <span class="properties-text"><img src="@/assets/ic_construction_date@3x.png" class="propertiess"
+                                alt="construction date" />{{
+                                    house.construction_date }} m²</span>
+                    </div>
+                    <div class="fullDetails">
+                        <span class="properties-text"><img src="@/assets/ic_bed@3x.png" class="propertiess" alt="bed" />{{
+                            house.bedroom }}</span>
+                        <span class="properties-text"><img src="@/assets/ic_bath@3x.png" class="propertiess" alt="bath" />{{
+                            house.bathroom }}</span>
+                        <span class="properties-text"><img src="@/assets/ic_garage@3x.png" class="propertiess"
+                                alt="garage" />{{
+                                    house.garage }} m²</span>
+                    </div>
+                </div>
+                <div class="defaultDetails" v-else>
+                    <h3>€ {{ house.price }}</h3>
+                    <h3>{{ house.street }}</h3>
+                    <div class="properties-container">
+                        <span class="properties-text"><img src="@/assets/ic_bed@3x.png" class="propertiess" alt="bed" />{{
+                            house.bedroom }}</span>
+                        <span class="properties-text"><img src="@/assets/ic_bath@3x.png" class="propertiess" alt="bath" />{{
+                            house.bathroom }}</span>
+                        <span class="properties-text"><img src="@/assets/ic_size@3x.png" class="propertiess" alt="size" />{{
+                            house.area }} m²</span>
+                    </div>
+                </div>
             </div>
+
             <div class="button-container">
                 <button @click="edit"><img src="@/assets/ic_edit@3x.png" class="icons" alt="Edit" /></button>
                 <button @click="delete"><img src="@/assets/ic_delete@3x.png" class="icons" alt="Delete" /></button>
@@ -24,7 +53,8 @@
 <script>
 export default {
     props: {
-        house: Object
+        house: Object,
+        fullInfo: Array  // Array containing custom info to display
     },
     methods: {
         edit() {
@@ -63,12 +93,19 @@ export default {
     gap: 0.5rem;
 }
 
-.properties {
+.propertiess {
     width: 20px;
-    margin-right: 1rem;
+    margin-right: 0.5rem;
 }
 
-.propertie-text {
+.properties-container {
+    display: flex;
+    gap: 1rem;
+    color: #8C8C8C;
+    align-items: center;
+}
+
+.properties-text {
     display: flex;
     align-items: center;
     font-size: large;
@@ -84,18 +121,24 @@ button {
     cursor: pointer;
 }
 
-.info-container {
+.detail-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 0.5rem;
 }
 
-.info {
+.fullDetails {
     display: flex;
     gap: 1rem;
     color: #8C8C8C;
     align-items: center;
+}
+
+.defaultDetails {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    color: #8C8C8C;
 }
 </style>
   

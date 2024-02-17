@@ -29,9 +29,11 @@ export default {
         return {
             shouldShowEmptyState: false,
             houses: [ // Dummy data for houses
-                { address: '1234 Main St', price: '$500.000', city: '12345 City', bathroom: 2, bedroom: 3, area: 100, image: 'https://via.placeholder.com/150' },
-                { address: '5678 Elm St', price: '$600.000', city: '56789 Town', bathroom: 3, bedroom: 4, area: 120, image: 'https://via.placeholder.com/150' },
-                { address: '91011 Oak St', price: '$700.000', city: '9101112 Village', bathroom: 3, bedroom: 5, area: 150, image: 'https://via.placeholder.com/150' }
+                { address: '1234 Main St', price: '500.000', street: '1011AA Amsterdam', bathroom: 2, bedroom: 3, area: 100, image: 'https://via.placeholder.com/150', construction_date: '2020', garage: 2 },
+                { address: '5678 Elm St', price: '600.000', street: '1011AA Amsterdam', bathroom: 3, bedroom: 4, area: 120, image: 'https://via.placeholder.com/150', construction_date: '2021', garage: 2 },
+                { address: '91011 Oak St', price: '700.000', street: '1011AA Amsterdam', bathroom: 3, bedroom: 5, area: 150, image: 'https://via.placeholder.com/150', construction_date: '2019', garage: 2 },
+                { address: '5678 Elm St', price: '600.000', street: '1011AA Amsterdam', bathroom: 3, bedroom: 4, area: 120, image: 'https://via.placeholder.com/150', construction_date: '2021', garage: 2 },
+                { address: '91011 Oak St', price: '700.000', street: '1011AA Amsterdam', bathroom: 3, bedroom: 5, area: 150, image: 'https://via.placeholder.com/150', construction_date: '2019', garage: 2 }
             ]
         };
     },
