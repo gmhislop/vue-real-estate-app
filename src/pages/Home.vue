@@ -8,9 +8,7 @@
                 <h2>Houses</h2>
                 <button class="createButton" @click="createNew">+ CREATE NEW</button>
             </div>
-            <div class="card-container">
-                <Card v-for="(house, index) in houses" :key="index" :house="house" />
-            </div>
+            <Card v-for="(house, index) in houses" :key="index" :house="house" />
         </div>
     </div>
 </template>
@@ -50,12 +48,9 @@ export default {
   
 <style scoped>
 .home {
-    display: flex;
     width: 100%;
-    align-items: center;
-    justify-content: center;
     height: 100%;
-    padding: 1rem 0;
+    padding: 1rem 10vw;
 }
 
 .content {
@@ -68,15 +63,14 @@ export default {
 
 .card-container {
     display: flex;
-    flex-wrap: wrap;
-    border-radius: 8px;
-    width: 75%;
+    flex-wrap: nowrap;
+    width: 100%;
 }
 
 .title-container {
     display: flex;
     justify-content: space-between;
-    width: 75%;
+    width: 100%;
     padding: 1rem 0;
 }
 

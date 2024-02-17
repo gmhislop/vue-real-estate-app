@@ -79,9 +79,8 @@ nav {
     display: flex;
     align-items: center;
     transition: all 0.5s ease;
-    width: 90%;
     gap: 1rem;
-    margin: 0 auto;
+    margin: 0 10vw;
 }
 
 ul {

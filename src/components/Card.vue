@@ -1,31 +1,41 @@
 <template>
-    <div class="card-container">
-        <img class="house-image" :src="house.image" :alt="house.address" />
+    <div :class="['card-container', showFullDetails ? 'column' : 'row']">
+        <img class="house-image" :src="house.image" :alt="house.address"
+            :style="{ width: showFullDetails ? '100%' : 'auto', borderRadius: showFullDetails ? '0px' : '8px', padding: showFullDetails ? '0' : '1rem' }" />
         <div class="detail-container">
             <div class="details">
                 <h2>{{ house.address }}</h2>
-                <div v-if="fullDetails">
-                    <div class="fullDetails">
-                        <h3>{{ house.street }}</h3>
+                <div v-if="showFullDetails">
+                    <div class="full-detail-container">
+                        <div class="fullDetails">
+                            <h3>{{ house.street }}</h3>
+                        </div>
+                        <div class="fullDetails">
+                            <span class="properties-text"><img src="@/assets/ic_price@3x.png" class="propertiess"
+                                    alt="price" />{{
+                                        house.price }}</span>
+                            <span class="properties-text"><img src="@/assets/ic_size@3x.png" class="propertiess"
+                                    alt="size" />{{
+                                        house.area }} m²</span>
+                            <span class="properties-text"><img src="@/assets/ic_construction_date@3x.png"
+                                    class="propertiess" alt="construction date" />Built in {{
+                                        house.construction_date }}</span>
+                        </div>
+                        <div class="fullDetails">
+                            <span class="properties-text"><img src="@/assets/ic_bed@3x.png" class="propertiess"
+                                    alt="bed" />{{
+                                        house.bedroom }}</span>
+                            <span class="properties-text"><img src="@/assets/ic_bath@3x.png" class="propertiess"
+                                    alt="bath" />{{
+                                        house.bathroom }}</span>
+                            <span class="properties-text"><img src="@/assets/ic_garage@3x.png" class="propertiess"
+                                    alt="garage" />{{
+                                        house.garage }} m²</span>
+                        </div>
                     </div>
                     <div class="fullDetails">
-                        <span class="properties-text"><img src="@/assets/ic_price@3x.png" class="propertiess"
-                                alt="price" />{{
-                                    house.price }}</span>
-                        <span class="properties-text"><img src="@/assets/ic_size@3x.png" class="propertiess" alt="size" />{{
-                            house.area }} m²</span>
-                        <span class="properties-text"><img src="@/assets/ic_construction_date@3x.png" class="propertiess"
-                                alt="construction date" />{{
-                                    house.construction_date }} m²</span>
-                    </div>
-                    <div class="fullDetails">
-                        <span class="properties-text"><img src="@/assets/ic_bed@3x.png" class="propertiess" alt="bed" />{{
-                            house.bedroom }}</span>
-                        <span class="properties-text"><img src="@/assets/ic_bath@3x.png" class="propertiess" alt="bath" />{{
-                            house.bathroom }}</span>
-                        <span class="properties-text"><img src="@/assets/ic_garage@3x.png" class="propertiess"
-                                alt="garage" />{{
-                                    house.garage }} m²</span>
+                        <p class="description">{{
+                            house.description }}</p>
                     </div>
                 </div>
                 <div class="defaultDetails" v-else>
@@ -54,7 +64,7 @@
 export default {
     props: {
         house: Object,
-        fullInfo: Array  // Array containing custom info to display
+        showFullDetails: Boolean
     },
     methods: {
         edit() {
@@ -70,11 +80,8 @@ export default {
 <style scoped>
 .card-container {
     display: flex;
-    position: relative;
-    width: 100%;
     gap: 1rem;
     margin: 1rem 0;
-    padding: 1rem;
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
@@ -88,8 +95,9 @@ export default {
     position: absolute;
     display: flex;
     align-items: center;
-    right: 1rem;
-    top: 1rem;
+    padding: 1rem;
+    right: 0;
+    top: 0;
     gap: 0.5rem;
 }
 
@@ -123,15 +131,26 @@ button {
 
 .detail-container {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    position: relative;
+    width: 100%;
+    justify-content: flex-start;
+    padding: 1rem;
 }
 
 .fullDetails {
     display: flex;
     gap: 1rem;
     color: #8C8C8C;
-    align-items: center;
+}
+
+.description {
+    margin: 1rem 0;
+}
+
+.full-detail-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
 .defaultDetails {
