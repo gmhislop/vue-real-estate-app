@@ -136,7 +136,7 @@ export default {
                 // Additional logic for submitting form
             } else {
                 console.error('Form has validation errors:', errors.value);
-                // Display error messages to the user
+                alert('Form has validation errors. Please check the form for more details.');
             }
         };
 
