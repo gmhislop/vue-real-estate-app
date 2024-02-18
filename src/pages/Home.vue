@@ -1,30 +1,30 @@
 <template>
     <div class="home">
+        <div class="title-container">
+            <h2>Houses</h2>
+            <button class="createButton" @click="createNew">+ CREATE NEW</button>
+        </div>
+        <div class="filter-container">
+            <div class="search-container">
+                <img alt="search logo" class="search-icon" src="@/assets/ic_search@3x.png" />
+                <input type="text" v-model="filter" placeholder="Search..." class="search-input" />
+                <img v-if="filter.length > 0" class="clear-icon" src="@/assets/ic_clear@3x.png" alt="Clear Filter"
+                    @click="clearFilter" />
+            </div>
+            <div class="toggle-container">
+                <button class="toggle-button-left" :class="{ 'active': sortBy === 'price' }" @click="setSortBy('price')">
+                    Price
+                </button>
+                <button class="toggle-button-right" :class="{ 'active': sortBy === 'size' }" @click="setSortBy('size')">
+                    Size
+                </button>
+            </div>
+        </div>
+        <p v-if="filter && filteredHouses.length > 0" class="result-count">{{ filteredHouses.length }} result(s) found</p>
         <div v-if="shouldShowEmptyState">
             <EmptyState />
         </div>
         <div v-else class="content">
-            <div class="title-container">
-                <h2>Houses</h2>
-                <button class="createButton" @click="createNew">+ CREATE NEW</button>
-            </div>
-            <div class="filter-container">
-                <div class="search-container">
-                    <img alt="search logo" class="search-icon" src="@/assets/ic_search@3x.png" />
-                    <input type="text" v-model="filter" placeholder="Search..." class="search-input" />
-                    <img v-if="filter.length > 0" class="clear-icon" src="@/assets/ic_clear@3x.png" alt="Clear Filter"
-                        @click="clearFilter" />
-                </div>
-                <div class="toggle-container">
-                    <button class="toggle-button-left" :class="{ 'active': sortBy === 'price' }"
-                        @click="setSortBy('price')">
-                        Price
-                    </button>
-                    <button class="toggle-button-right" :class="{ 'active': sortBy === 'size' }" @click="setSortBy('size')">
-                        Size
-                    </button>
-                </div>
-            </div>
             <Card v-for="(house, index) in filteredHouses" :key="index" :house="house" />
         </div>
     </div>
@@ -70,13 +70,20 @@ export default {
     },
     computed: {
         filteredHouses() {
-            return this.houses.filter(house =>
-                house.address.toLowerCase().includes(this.filter.toLowerCase())
+            return this.houses.filter((house) =>
+                Object.values(house).some((value) =>
+                    typeof value === "string" && value.toLowerCase().includes(this.filter.toLowerCase())
+                )
             ).sort((a, b) => {
                 return this.sortBy === 'price' ? a.price - b.price : a.size - b.size;
             });
-        }
-    }
+        },
+    },
+    watch: {
+        filteredHouses() {
+            this.shouldShowEmptyState = this.filteredHouses.length === 0;
+        },
+    },
 };
 </script>
 
@@ -106,6 +113,12 @@ export default {
 }
 
 h2 {
+    font-weight: 700;
+}
+
+.result-count {
+    margin-bottom: 1rem;
+    font-size: large;
     font-weight: 700;
 }
 

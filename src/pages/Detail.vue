@@ -1,6 +1,6 @@
 <template>
     <div class="detail">
-        <router-link class="link" to="/"><img src="@/assets/ic_back_grey@3x.png" class="back-icon" alt="back" />Back to
+        <router-link class="back-link" to="/"><img src="@/assets/ic_back_grey@3x.png" class="back-icon" alt="back" />Back to
             overview</router-link>
         <div class="content-wrapper">
             <div class="detail-container">
@@ -69,7 +69,7 @@ h2 {
     height: 1rem;
 }
 
-.link {
+.back-link {
     display: flex;
     align-items: center;
     text-decoration: none;
