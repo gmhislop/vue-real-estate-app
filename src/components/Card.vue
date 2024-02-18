@@ -1,7 +1,7 @@
 <template>
-    <div :class="['card-container', showFullDetails ? 'column' : 'row']">
+    <div :class="['card-container']" :style="{ flexDirection: showFullDetails ? 'column' : 'row' }">
         <img class="house-image" :src="house.image" :alt="house.address"
-            :style="{ width: showFullDetails ? '100%' : 'auto', borderRadius: showFullDetails ? '0px' : '8px', padding: showFullDetails ? '0' : '1rem' }" />
+            :style="{ width: showFullDetails ? '100%' : 'auto', height: showFullDetails ? '400px' : '100%', borderRadius: showFullDetails ? '0px' : '8px', padding: showFullDetails ? '0' : '1rem' }" />
         <div class="detail-container">
             <div class="details">
                 <h2>{{ house.address }}</h2>
@@ -52,7 +52,7 @@
                 </div>
             </div>
 
-            <div class="button-container">
+            <div class="button-container" v-if="!hideButtonContainer">
                 <button @click="edit"><img src="@/assets/ic_edit@3x.png" class="icons" alt="Edit" /></button>
                 <button @click="delete"><img src="@/assets/ic_delete@3x.png" class="icons" alt="Delete" /></button>
             </div>
@@ -64,7 +64,11 @@
 export default {
     props: {
         house: Object,
-        showFullDetails: Boolean
+        showFullDetails: Boolean,
+        hideButtonContainer: {
+            type: Boolean,
+            default: false
+        }
     },
     methods: {
         edit() {
@@ -80,8 +84,8 @@ export default {
 <style scoped>
 .card-container {
     display: flex;
-    gap: 1rem;
-    margin: 1rem 0;
+    width: 100%;
+    min-width: 500px;
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
@@ -89,6 +93,8 @@ export default {
 
 .house-image {
     border-radius: 8px;
+    height: 400px;
+    object-fit: cover;
 }
 
 .button-container {
@@ -114,6 +120,7 @@ export default {
 }
 
 .properties-text {
+    white-space: nowrap;
     display: flex;
     align-items: center;
     font-size: large;
@@ -132,9 +139,8 @@ button {
 .detail-container {
     display: flex;
     position: relative;
-    width: 100%;
-    justify-content: flex-start;
     padding: 1rem;
+    width: 100%;
 }
 
 .fullDetails {

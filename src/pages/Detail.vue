@@ -3,6 +3,10 @@
         <div class="card-container">
             <Card v-for="(house, index) in houses" :key="index" :house="house" showFullDetails />
         </div>
+        <div class="recommendation-container">
+            <h2>Recommeneded for you</h2>
+            <Card v-for="(house, index) in houses" :key="index" :house="house" hideButtonContainer />
+        </div>
     </div>
 </template>
   
@@ -27,18 +31,25 @@ export default {
   
 <style scoped>
 .detail {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
+    width: 100%;
     padding: 1rem 10vw;
+    display: flex;
+    gap: 5vw;
+    flex-direction: row;
 }
 
 .card-container {
     display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    width: 100%;
+}
+
+.recommendation-container {
+    display: flex;
+    flex-direction: column;
+}
+
+h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
 }
 </style>

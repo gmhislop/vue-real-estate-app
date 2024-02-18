@@ -48,7 +48,7 @@ export default {
   
 <style scoped>
 .home {
-    width: 100%;
+    /* width: 100%; */
     height: 100%;
     padding: 1rem 10vw;
 }
@@ -58,12 +58,10 @@ export default {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100%;
 }
 
 .card-container {
     display: flex;
-    flex-wrap: nowrap;
     width: 100%;
 }
 
