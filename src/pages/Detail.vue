@@ -1,11 +1,15 @@
 <template>
     <div class="detail">
-        <div class="card-container">
-            <Card v-for="(house, index) in houses" :key="index" :house="house" showFullDetails />
-        </div>
-        <div class="recommendation-container">
-            <h2>Recommeneded for you</h2>
-            <Card v-for="(house, index) in houses" :key="index" :house="house" hideButtonContainer />
+        <router-link class="link" to="/"><img src="@/assets/ic_back_grey@3x.png" class="back-icon" alt="back" />Back to
+            overview</router-link>
+        <div class="content-wrapper">
+            <div class="detail-container">
+                <Card v-for="(house, index) in houses" :key="index" :house="house" showFullDetails />
+            </div>
+            <div class="recommendation-container">
+                <h2>Recommeneded for you</h2>
+                <Card v-for="(house, index) in houses" :key="index" :house="house" hideButtonContainer />
+            </div>
         </div>
     </div>
 </template>
@@ -34,11 +38,18 @@ export default {
     width: 100%;
     padding: 1rem 10vw;
     display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.content-wrapper {
+    width: 100%;
+    display: flex;
     gap: 5vw;
     flex-direction: row;
 }
 
-.card-container {
+.detail-container {
     display: flex;
 }
 
@@ -50,6 +61,22 @@ export default {
 h2 {
     font-size: 1.5rem;
     font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.back-icon {
+    margin-right: 0.5rem;
+    height: 1rem;
+}
+
+.link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    font-weight: 700;
+    color: #000000;
+    cursor: pointer;
+    width: fit-content;
     margin-bottom: 1rem;
 }
 </style>
