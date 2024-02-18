@@ -8,15 +8,24 @@
                 <h2>Houses</h2>
                 <button class="createButton" @click="createNew">+ CREATE NEW</button>
             </div>
-            <div class="toggle-container">
-                <button class="toggle-button-left" :class="{ 'active': sortBy === 'price' }" @click="setSortBy('price')">
-                    Price
-                </button>
-                <button class="toggle-button-right" :class="{ 'active': sortBy === 'size' }" @click="setSortBy('size')">
-                    Size
-                </button>
+            <div class="filter-container">
+                <div class="search-container">
+                    <img alt="search logo" class="search-icon" src="@/assets/ic_search@3x.png" />
+                    <input type="text" v-model="filter" placeholder="Search..." class="search-input" />
+                    <img v-if="filter.length > 0" class="clear-icon" src="@/assets/ic_clear@3x.png" alt="Clear Filter"
+                        @click="clearFilter" />
+                </div>
+                <div class="toggle-container">
+                    <button class="toggle-button-left" :class="{ 'active': sortBy === 'price' }"
+                        @click="setSortBy('price')">
+                        Price
+                    </button>
+                    <button class="toggle-button-right" :class="{ 'active': sortBy === 'size' }" @click="setSortBy('size')">
+                        Size
+                    </button>
+                </div>
             </div>
-            <Card v-for="(house, index) in sortedHouses" :key="index" :house="house" />
+            <Card v-for="(house, index) in filteredHouses" :key="index" :house="house" />
         </div>
     </div>
 </template>
@@ -35,6 +44,7 @@ export default {
         return {
             shouldShowEmptyState: false,
             sortBy: 'price',
+            filter: '',
             houses: [ // Dummy data for houses
                 { address: '1234 Main St', price: '500.000', street: '1011AA Amsterdam', bathroom: 2, bedroom: 3, area: 100, image: 'https://via.placeholder.com/150', construction_date: '2020', garage: 2 },
                 { address: '5678 Elm St', price: '600.000', street: '1011AA Amsterdam', bathroom: 3, bedroom: 4, area: 120, image: 'https://via.placeholder.com/150', construction_date: '2021', garage: 2 },
@@ -53,11 +63,16 @@ export default {
         },
         setSortBy(option) {
             this.sortBy = option;
+        },
+        clearFilter() {
+            this.filter = '';
         }
     },
     computed: {
-        sortedHouses() {
-            return this.houses.slice().sort((a, b) => {
+        filteredHouses() {
+            return this.houses.filter(house =>
+                house.address.toLowerCase().includes(this.filter.toLowerCase())
+            ).sort((a, b) => {
                 return this.sortBy === 'price' ? a.price - b.price : a.size - b.size;
             });
         }
@@ -92,6 +107,41 @@ export default {
 
 h2 {
     font-weight: 700;
+}
+
+.search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.search-input {
+    border: none;
+    padding: 0.5rem 0.5rem 0.5rem 3rem;
+    border-radius: 4px;
+    background-color: #E8E8E8;
+}
+
+.clear-icon {
+    position: absolute;
+    right: 1rem;
+    width: 1rem;
+    cursor: pointer;
+}
+
+.search-icon {
+    position: absolute;
+    left: 1rem;
+    width: 1rem;
+    pointer-events: none;
+}
+
+.filter-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 1rem;
 }
 
 .toggle-container {
