@@ -1,5 +1,5 @@
 export type House = {
-    id: string;
+    id: number;
     price: number;
     size: number;
     location: {

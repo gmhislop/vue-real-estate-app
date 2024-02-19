@@ -1,8 +1,6 @@
 import type { AxiosResponse } from 'axios';
 import axios from 'axios';
-import type { House } from '../../types/types';
-
-
+import type { House } from '@/types/types';
 
 export const instance = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL as string,
