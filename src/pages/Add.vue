@@ -46,7 +46,7 @@ export default {
     align-items: center;
     text-decoration: none;
     font-weight: 700;
-    color: #000000;
+    color: var(--color-text);
     cursor: pointer;
     width: fit-content;
     margin-bottom: 1rem;

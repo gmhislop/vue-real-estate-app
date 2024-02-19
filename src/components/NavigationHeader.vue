@@ -1,10 +1,18 @@
 <template>
     <header v-show="!mobile" :class="{ 'scroll-nav': scrollPosition }">
         <nav>
-            <img alt="DTT Logo" class="logo" src="@/assets/dtt-logo.png" width="50" />
+            <img alt="DTT Logo" class="logo" src="@/assets/dtt-logo.png" width="80" />
             <ul class="navigation">
-                <li><router-link class="link" to="/">Houses</router-link></li>
-                <li><router-link class="link" to="/about">About</router-link></li>
+                <li>
+                    <router-link class="link" to="/" exact>
+                        <span :class="{ 'active': $route.path === '/' }">Houses</span>
+                    </router-link>
+                </li>
+                <li>
+                    <router-link class="link" to="/about" exact>
+                        <span :class="{ 'active': $route.path === '/about' }">About</span>
+                    </router-link>
+                </li>
             </ul>
         </nav>
     </header>
@@ -61,7 +69,6 @@ export default defineComponent({
     },
 });
 </script>
-
   
 <style scoped>
 header {
@@ -70,9 +77,9 @@ header {
     position: fixed;
     top: 0;
     transition: all 0.5s ease;
-    padding: 0.5rem;
-    color: white;
-    background-color: white;
+    padding: 1rem 0;
+    color: var(--color-primary);
+    background-color: var(--color-background-2);
 }
 
 nav {
@@ -91,10 +98,14 @@ ul,
 .link {
     list-style: none;
     text-decoration: none;
-    font-weight: 700;
-    color: #000000;
+    color: var(--color-tertiary-dark);
     gap: 1rem;
     cursor: pointer;
+}
+
+.active {
+    color: var(--color-text-primary);
+    font-weight: 700;
 }
 
 li {
@@ -109,18 +120,13 @@ li {
     border-bottom: 1px solid transparent;
 }
 
-.link:hover {
-    color: blue;
-    border-color: blue;
-}
-
 .logo {
     cursor: pointer;
 }
 
 .dropdown-nav {
-    color: #000000;
-    background-color: #000000;
+    color: var(--color-text-primary);
+    background-color: var(--color-background-1);
 }
 
 @media (min-width: 768px) {
@@ -134,6 +140,4 @@ li {
     gap: 1rem;
 }
 </style>
-
-
   

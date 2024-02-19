@@ -12,10 +12,12 @@
                     @click="clearFilter" />
             </div>
             <div class="toggle-container">
-                <button class="toggle-button-left" :class="{ 'active': sortBy === 'price' }" @click="setSortBy('price')">
+                <button class="toggle-button-left tabs" :class="{ 'active': sortBy === 'price' }"
+                    @click="setSortBy('price')">
                     Price
                 </button>
-                <button class="toggle-button-right" :class="{ 'active': sortBy === 'size' }" @click="setSortBy('size')">
+                <button class="toggle-button-right tabs" :class="{ 'active': sortBy === 'size' }"
+                    @click="setSortBy('size')">
                     Size
                 </button>
             </div>
@@ -29,7 +31,7 @@
         </div>
     </div>
 </template>
-
+  
 <script>
 import EmptyState from '@/components/EmptyState.vue';
 import Card from '@/components/Card.vue';
@@ -55,11 +57,8 @@ export default {
         };
     },
     methods: {
-        confirmDelete() {
-            // Method logic for confirming deletion
-        },
         createNew() {
-            // Method logic for creating new house
+            this.$router.push('/add');
         },
         setSortBy(option) {
             this.sortBy = option;
@@ -86,7 +85,7 @@ export default {
     },
 };
 </script>
-
+  
 <style scoped>
 .home {
     padding: 1rem 10vw;
@@ -130,9 +129,9 @@ h2 {
 
 .search-input {
     border: none;
-    padding: 0.5rem 0.5rem 0.5rem 3rem;
+    padding: 1rem 0rem 1rem 6vw;
     border-radius: 4px;
-    background-color: #E8E8E8;
+    background-color: var(--color-tertiary-light);
 }
 
 .clear-icon {
@@ -152,22 +151,22 @@ h2 {
 .filter-container {
     display: flex;
     justify-content: space-between;
-    align-items: center;
     width: 100%;
     margin-bottom: 1rem;
 }
 
 .toggle-container {
     display: flex;
-    background-color: #C3C3C3;
+    background-color: var(--color-background-3);
     border-radius: 8px;
 }
 
 .toggle-container button {
     border: none;
-    padding: 0.5rem 2rem;
+    padding: 0.5rem 4vw;
     cursor: pointer;
-    color: black;
+    background-color: var(--color-tertiary-dark);
+    color: var(--color-text-tertiary);
 }
 
 .toggle-button-left {
@@ -181,16 +180,17 @@ h2 {
 }
 
 .toggle-container button.active {
-    background-color: #EB5440;
-    color: white;
+    background-color: var(--color-primary);
+    color: var(--color-text-tertiary);
 }
 
 .createButton {
-    background-color: #EB5440;
-    color: white;
+    background-color: var(--color-primary);
+    color: var(--color-text-tertiary);
     border: none;
     padding: 0.5rem 1.25rem;
     border-radius: 8px;
     cursor: pointer;
 }
 </style>
+  

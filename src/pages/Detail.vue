@@ -7,7 +7,7 @@
                 <Card v-for="(house, index) in houses" :key="index" :house="house" showFullDetails />
             </div>
             <div class="recommendation-container">
-                <h2>Recommeneded for you</h2>
+                <h2>Recommended for you</h2>
                 <Card v-for="(house, index) in houses" :key="index" :house="house" hideButtonContainer />
             </div>
         </div>
@@ -62,6 +62,8 @@ h2 {
     font-size: 1.5rem;
     font-weight: 700;
     margin-bottom: 1rem;
+    color: var(--color-text);
+    /* Updated color */
 }
 
 .back-icon {
@@ -74,7 +76,7 @@ h2 {
     align-items: center;
     text-decoration: none;
     font-weight: 700;
-    color: #000000;
+    color: var(--color-text);
     cursor: pointer;
     width: fit-content;
     margin-bottom: 1rem;

@@ -34,8 +34,15 @@
                 <label for="image">Upload picture (PNG or JPG)</label>
                 <input type="file" id="image" accept="image/png, image/jpeg" @change="handleImageUpload"
                     style="display: none;" />
-                <label for="image" class="upload-icon">
-                    <img src="@/assets/ic_upload@3x.png" alt="Upload Image" width="24px" />
+                <label for="image" class="upload-icon" :style="{ border: formData.image ? 'none' : '1px dashed #000000' }">
+                    <div class="image-upload-container">
+                        <div v-if="formData.image" class="image-preview-container">
+                            <button class="delete-button" @click="deleteImage"><img alt="Delete image" class="delete-image"
+                                    src="@/assets/ic_clear_white@3x.png" width="24px" /></button>
+                            <img class="image-preview" :src="formData.image" alt="Uploaded Image Preview" />
+                        </div>
+                        <img v-else src="@/assets/ic_upload@3x.png" alt="Upload Image" width="24px" />
+                    </div>
                 </label>
             </div>
             <div class="form-group">
@@ -53,7 +60,8 @@
                     <label for="garage">Garage*</label>
                     <select id="garage" v-model="formData.garage" required>
                         <option value="">Select</option>
-                        <option v-for="i in 10" :value="i">{{ i }}</option>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
                     </select>
                     <span v-if="errors.garage" class="error-message">{{ errors.garage }}</span>
                 </div>
@@ -82,7 +90,7 @@
                     required></textarea>
                 <span v-if="errors.description" class="error-message">{{ errors.description }}</span>
             </div>
-            <button type="submit">{{ submitButtonText }}</button>
+            <button class="submit-button" type="submit">{{ submitButtonText }}</button>
         </form>
     </div>
 </template>
@@ -113,7 +121,7 @@ export default {
         });
 
         const formTitle = computed(() => props.listing ? 'Edit listing' : 'Create new listing');
-        const submitButtonText = computed(() => props.listing ? 'Update' : 'POST');
+        const submitButtonText = computed(() => props.listing ? 'SAVE' : 'POST');
 
         const errors = ref({
             street_name: '',
@@ -128,6 +136,23 @@ export default {
             construction_date: '',
             description: ''
         });
+
+        const deleteImage = () => {
+            formData.value.image = null; // Reset image to null
+        };
+
+        const handleImageUpload = (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                // Read the uploaded file as a data URL
+                const reader = new FileReader();
+                reader.onload = () => {
+                    // Update the formData with the image data
+                    formData.value.image = reader.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        };
 
         const submitForm = () => {
             validateForm();
@@ -145,7 +170,9 @@ export default {
             formTitle,
             submitButtonText,
             submitForm,
-            errors
+            errors,
+            handleImageUpload,
+            deleteImage
         };
     }
 };
@@ -154,6 +181,7 @@ export default {
 <style scoped>
 .upload-icon {
     cursor: pointer;
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -162,6 +190,38 @@ export default {
     border: 1px dashed #000000;
     border-spacing: 2rem;
     margin-top: 1rem;
+}
+
+.image-upload-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-preview-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.delete-button {
+    background: none;
+    border: none;
+    position: absolute;
+    padding: 0;
+    top: -4px;
+    right: -8px;
+    cursor: pointer;
+}
+
+.image-preview {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
 }
 
 form {
@@ -187,7 +247,7 @@ select {
     width: 100%;
 }
 
-button {
+.submit-button {
     display: flex;
     align-items: center;
     margin-left: auto;

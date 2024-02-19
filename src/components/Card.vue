@@ -4,43 +4,38 @@
             :style="{ width: showFullDetails ? '100%' : 'auto', height: showFullDetails ? '400px' : '100%', borderRadius: showFullDetails ? '0px' : '8px', padding: showFullDetails ? '0' : '1rem' }" />
         <div class="detail-container">
             <div class="details">
-                <h2>{{ house.address }}</h2>
                 <div v-if="showFullDetails">
+                    <h1>{{ house.address }}</h1>
                     <div class="full-detail-container">
                         <div class="fullDetails">
                             <h3>{{ house.street }}</h3>
                         </div>
                         <div class="fullDetails">
                             <span class="properties-text"><img src="@/assets/ic_price@3x.png" class="propertiess"
-                                    alt="price" />{{
-                                        house.price }}</span>
+                                    alt="price" />{{ house.price }}</span>
                             <span class="properties-text"><img src="@/assets/ic_size@3x.png" class="propertiess"
-                                    alt="size" />{{
-                                        house.area }} m²</span>
+                                    alt="size" />{{ house.area }} m²</span>
                             <span class="properties-text"><img src="@/assets/ic_construction_date@3x.png"
-                                    class="propertiess" alt="construction date" />Built in {{
-                                        house.construction_date }}</span>
+                                    class="propertiess" alt="construction date" />Built in {{ house.construction_date
+                                    }}</span>
                         </div>
                         <div class="fullDetails">
                             <span class="properties-text"><img src="@/assets/ic_bed@3x.png" class="propertiess"
-                                    alt="bed" />{{
-                                        house.bedroom }}</span>
+                                    alt="bed" />{{ house.bedroom }}</span>
                             <span class="properties-text"><img src="@/assets/ic_bath@3x.png" class="propertiess"
-                                    alt="bath" />{{
-                                        house.bathroom }}</span>
+                                    alt="bath" />{{ house.bathroom }}</span>
                             <span class="properties-text"><img src="@/assets/ic_garage@3x.png" class="propertiess"
-                                    alt="garage" />{{
-                                        house.garage }} m²</span>
+                                    alt="garage" />{{ house.garage }} m²</span>
                         </div>
                     </div>
                     <div class="fullDetails">
-                        <p class="description">{{
-                            house.description }}</p>
+                        <p class="description listing-information">{{ house.description }}</p>
                     </div>
                 </div>
                 <div class="defaultDetails" v-else>
+                    <h2>{{ house.address }}</h2>
                     <h3>€ {{ house.price }}</h3>
-                    <h3>{{ house.street }}</h3>
+                    <p>{{ house.street }}</p>
                     <div class="properties-container">
                         <span class="properties-text"><img src="@/assets/ic_bed@3x.png" class="propertiess" alt="bed" />{{
                             house.bedroom }}</span>
@@ -54,14 +49,21 @@
 
             <div class="button-container" v-if="!hideButtonContainer">
                 <button @click="edit"><img src="@/assets/ic_edit@3x.png" class="icons" alt="Edit" /></button>
-                <button @click="delete"><img src="@/assets/ic_delete@3x.png" class="icons" alt="Delete" /></button>
+                <button @click="showDeleteModal = true"><img src="@/assets/ic_delete@3x.png" class="icons"
+                        alt="Delete" /></button>
             </div>
+            <delete-modal :show-modal="showDeleteModal" @cancel="cancelDelete" @confirm="confirmDelete" />
         </div>
     </div>
 </template>
   
 <script>
+import DeleteModal from './DeleteModal.vue';
+
 export default {
+    components: {
+        DeleteModal
+    },
     props: {
         house: Object,
         showFullDetails: Boolean,
@@ -70,12 +72,24 @@ export default {
             default: false
         }
     },
+    data() {
+        return {
+            showDeleteModal: false
+        };
+    },
     methods: {
         edit() {
-            // Method logic for editing
+            this.$router.push(`/edit/${this.house.id}`);
         },
-        delete() {
-            // Method logic for deleting
+        cancelDelete() {
+            // Cancel deletion
+            this.showDeleteModal = false;
+        },
+        confirmDelete() {
+            // Confirm deletion
+            // Implement logic to delete the house
+            console.log('Deleting house:', this.house);
+            this.showDeleteModal = false;
         }
     }
 };
@@ -86,7 +100,7 @@ export default {
     display: flex;
     width: 100%;
     min-width: 500px;
-    background-color: #fff;
+    background-color: var(--color-background-2);
     border-radius: 8px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
@@ -115,7 +129,7 @@ export default {
 .properties-container {
     display: flex;
     gap: 1rem;
-    color: #8C8C8C;
+    color: var(--color-tertiary);
     align-items: center;
 }
 
@@ -146,11 +160,12 @@ button {
 .fullDetails {
     display: flex;
     gap: 1rem;
-    color: #8C8C8C;
 }
 
 .description {
     margin: 1rem 0;
+    color: var(--color-text-secondary);
+    font-weight: 400;
 }
 
 .full-detail-container {
@@ -163,7 +178,7 @@ button {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    color: #8C8C8C;
+    color: var(--color-tertiary);
 }
 </style>
   

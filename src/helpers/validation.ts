@@ -44,12 +44,12 @@ export default function validateForm(formData: FormData) {
         errors.garage = 'Garage amount is required.';
     }
 
-    if (!formData.bedroom) {
-        errors.bedroom = 'Bedroom amount is required.';
+    if (!formData.bedroom || isNaN(parseInt(formData.bedroom))) {
+        errors.bedroom = 'Please enter a valid number for bedroom.';
     }
 
-    if (!formData.bathroom) {
-        errors.bathroom = 'Bathroom amount is required.';
+    if (!formData.bathroom || isNaN(parseInt(formData.bathroom))) {
+        errors.bathroom = 'Please enter a valid number for bathroom.';
     }
 
     if (!formData.construction_date) {

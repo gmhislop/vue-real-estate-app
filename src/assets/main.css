@@ -1,19 +1,93 @@
 @import './base.css';
 
-body {
-  font-family: 'Roboto', sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #F6F6F6;
-  color: #000000;
-  font-size: 16px;
+/* Type Style System */
+
+/* Montserrat Bold */
+h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 2rem; /* desktop */
   line-height: 1.6;
+
+  @media screen and (max-width: 768px) {
+    font-size: 1.125rem; /* mobile */
+  }
 }
 
-a:visited,  a{
-  text-decoration: none;
-  transition: 0.4s;
-  color: #000000;
-  padding: 3px;
+/* Montserrat Semibold */
+button,
+.tabs {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600; /* Semibold */
+  font-size: 1.125rem; /* desktop */
+  line-height: 1.6;
+
+  @media screen and (max-width: 768px) {
+    font-size: 0.75rem; /* mobile */
+  }
 }
 
+/* Montserrat Medium */
+.inactive-menu,
+.error-message,
+.listing-information,
+.body-text,
+.input-field {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500; /* Medium */
+  font-size: 1rem; /* desktop */
+  line-height: 1.6;
+
+  @media screen and (max-width: 768px) {
+    font-size: 0.75rem; /* mobile */
+  }
+}
+
+/* Montserrat Medium Italic */
+.error-message {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500; /* Medium */
+  font-size: 1rem; /* desktop */
+  font-style: italic;
+  line-height: 1.6;
+
+  @media screen and (max-width: 768px) {
+    font-size: 0.75rem; /* mobile */
+  }
+}
+
+/* Open Sans Semibold */
+.listing-information {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600; /* Semibold */
+  font-size: 1rem; /* desktop */
+  line-height: 1.6;
+
+  @media screen and (max-width: 768px) {
+    font-size: 0.75rem; /* mobile */
+  }
+}
+
+/* Open Sans Regular */
+.body-text {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400; /* Regular */
+  font-size: 1.125rem; /* desktop */
+  line-height: 1.6;
+
+  @media screen and (max-width: 768px) {
+    font-size: 0.75rem; /* mobile */
+  }
+}
+
+/* Input field */
+.input-field {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400; /* Regular */
+  font-size: 1rem; /* desktop */
+  line-height: 1.6;
+
+  @media screen and (max-width: 768px) {
+    font-size: 0.75rem; /* mobile */
+  }
+}
