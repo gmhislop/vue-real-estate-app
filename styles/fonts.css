@@ -1,0 +1,33 @@
+:root {
+  /* Font families */
+  --font-headings: 'Montserrat', sans-serif;
+  --font-body: 'Open Sans', sans-serif;
+
+  /* Forn weights */
+  --bold: 700;
+  --semibold: 600;
+  --medium: 500;
+  --regular: 400;
+
+  /* Font sizes */
+  --header-1: 1.125rem;
+  --header-2: 0.875rem;
+  --header-menu: 1.125rem;
+  --buttons-tabs-text: 0.75rem;
+  --back-button-label: 1rem;
+  --input-errors: 0.75rem;
+  --empty-message: 0.875rem;
+  --listing-information: 0.75rem;
+  --link: 0.625rem;
+}
+
+@media screen and (min-width: 1024px) {
+  :root {
+      --header-1: 2rem;
+      --header-2: 1.375rem;
+      --buttons-tabs-text: 1.125rem;
+      --input-errors: 0.875rem;
+      --empty-message: 1.125rem;
+      --listing-information: 1rem;
+  }
+}
