@@ -1,18 +1,55 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
-import Home from '@/pages/Home.vue';
-import About from '@/pages/About.vue';
-import Edit from '@/pages/Edit.vue';
-import Add from '@/pages/Add.vue';
-import Detail from '@/pages/Detail.vue';
+
+import AppVue from '@/App.vue';
 
 
-export const router = createRouter({
-  history: createWebHashHistory(),
+export const HOME_PAGE = 'home'
+export const CREATE_PAGE = 'create'
+export const DETAIL_PAGE = 'details'
+export const EDIT_PAGE = 'edit'
+export const ABOUT_PAGE = 'about'
+
+const router = createRouter({
+  history: createWebHashHistory(import.meta.env.BASE_URL),
   routes: [
-    { path: '/', component: Home },
-    { path: '/about', component: About },
-    { path: '/edit/:id', component: Edit, props: true },
-    { path: '/houses/:id', component: Detail, props: true },
-    { path: '/add', component: Add, props: true },
-  ],
-});
+    {
+      path: '/',
+      redirect: '/properties'
+    },
+
+    {
+      path: '/properties',
+      component: AppVue,
+      children: [
+        {
+          path: '',
+          name: HOME_PAGE,
+          component: () => import('@/pages/Houses/OverviewPage.vue')
+        },
+        {
+          path: 'create',
+          name: CREATE_PAGE,
+          component: () => import('../pages/Houses/CreatePage.vue')
+        },
+        {
+          path: ':id',
+          name: DETAIL_PAGE,
+          component: () => import('@/pages/Houses/DetailPage.vue')
+        },
+        {
+          path: ':id/edit',
+          name: EDIT_PAGE,
+          component: () => import('@/pages/Houses/EditPage.vue')
+        }
+      ]
+    },
+
+    {
+      path: '/about',
+      name: ABOUT_PAGE,
+      component: () => import('@/pages/AboutPage.vue')
+    }
+  ]
+})
+
+export default router

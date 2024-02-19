@@ -1,143 +1,106 @@
 <template>
-    <header v-show="!mobile" :class="{ 'scroll-nav': scrollPosition }">
-        <nav>
-            <img alt="DTT Logo" class="logo" src="@/assets/dtt-logo.png" width="80" />
-            <ul class="navigation">
-                <li>
-                    <router-link class="link" to="/" exact>
-                        <span :class="{ 'active': $route.path === '/' }">Houses</span>
-                    </router-link>
-                </li>
-                <li>
-                    <router-link class="link" to="/about" exact>
-                        <span :class="{ 'active': $route.path === '/about' }">About</span>
-                    </router-link>
-                </li>
-            </ul>
+    <!-- Desktop version -->
+    <header class="header-desktop">
+        <nav class="desktop-nav" aria-label="Main navigation">
+            <RouterLink :to="{ name: HOME_PAGE }">
+                <img alt="Logo" class="logo" src="@/assets/dtt-logo.png" width="45" height="45" />
+            </RouterLink>
+            <RouterLink :to="{ name: HOME_PAGE }">Houses</RouterLink>
+            <RouterLink :to="{ name: ABOUT_PAGE }">About</RouterLink>
         </nav>
     </header>
+
+    <!-- Mobile version -->
+    <nav class="mobile-nav" aria-label="Main navigation">
+        <RouterLink :to="{ name: HOME_PAGE }">
+            <img alt="House icon" class="nav-icon nav-icon--inactive" src="@/assets/mobile_navigation_home.png" />
+            <img alt="House icon" class="nav-icon nav-icon--active" src="@/assets/mobile_navigation_home_active.png" />
+        </RouterLink>
+        <RouterLink :to="{ name: ABOUT_PAGE }">
+            <img alt="Information icon" class="nav-icon nav-icon--inactive" src="@/assets/mobile_navigation_info.png" />
+            <img alt="Information icon" class="nav-icon nav-icon--active"
+                src="@/assets/mobile_navigation_info_active.png" />
+        </RouterLink>
+    </nav>
 </template>
   
-<script lang="ts">
-import { defineComponent } from 'vue';
-
-type NavBarProps = {
-    mobileNav: null | boolean;
-    mobile: null | boolean;
-    scrollPosition: number | null;
-    windowWidth: number | null;
-    toggleMobileNav: () => void;
-    checkScreen: () => void;
-};
-
-export default defineComponent({
-    name: 'NavigationHeader',
-    data() {
-        return {
-            mobileNav: null,
-            mobile: true,
-            scrollPosition: null,
-            windowWidth: null,
-        } as NavBarProps;
-    },
-    created() {
-        this.checkScreen();
-        window.addEventListener('resize', this.checkScreen);
-    },
-    methods: {
-        toggleMobileNav() {
-            this.mobileNav = !this.mobileNav;
-        },
-        checkScreen() {
-            this.windowWidth = window.innerWidth;
-            if (this.windowWidth < 768) {
-                this.mobile = true;
-            } else {
-                this.mobile = false;
-            }
-            if (!this.mobile || this.scrollPosition) {
-                this.mobileNav = false;
-            }
-        },
-    },
-    mounted() {
-        this.checkScreen();
-        window.addEventListener('resize', this.checkScreen);
-    },
-    beforeUnmount() {
-        window.removeEventListener('resize', this.checkScreen);
-    },
-});
+<script setup>
+import { HOME_PAGE, ABOUT_PAGE } from '@/router';
 </script>
-  
 <style scoped>
-header {
-    z-index: 100;
-    width: 100%;
-    position: fixed;
-    top: 0;
-    transition: all 0.5s ease;
-    padding: 1rem 0;
-    color: var(--color-primary);
-    background-color: var(--color-background-2);
+.header-desktop {
+    display: none;
 }
 
-nav {
+.desktop-nav {
+    max-width: 1440px;
+    padding: 16px 165px 16px 165px;
+    margin: auto;
     display: flex;
     align-items: center;
-    transition: all 0.5s ease;
-    gap: 1rem;
-    margin: 0 10vw;
-}
-
-ul {
-    padding: 0;
-}
-
-ul,
-.link {
-    list-style: none;
-    text-decoration: none;
-    color: var(--color-tertiary-dark);
-    gap: 1rem;
-    cursor: pointer;
-}
-
-.active {
-    color: var(--color-text-primary);
-    font-weight: 700;
-}
-
-li {
-    display: inline;
-    margin-left: 2rem;
-}
-
-.link {
-    font-size: 0.8rem;
-    transition: .5s ease all;
-    padding-bottom: 4px;
-    border-bottom: 1px solid transparent;
+    gap: 64px;
 }
 
 .logo {
-    cursor: pointer;
+    display: block;
 }
 
-.dropdown-nav {
-    color: var(--color-text-primary);
-    background-color: var(--color-background-1);
+nav {
+    font-size: var(--header-menu);
 }
 
-@media (min-width: 768px) {
-    nav {
-        max-width: 1140px;
-    }
+nav a.router-link-active {
+    font-weight: var(--bold);
+    color: var(--text-primary);
 }
 
-.nav-links {
+nav a.router-link-active:hover {
+    background-color: transparent;
+}
+
+a.router-link-active .nav-icon--inactive {
+    display: none;
+}
+
+a.router-link-active .nav-icon--active {
+    display: block;
+}
+
+a .nav-icon--inactive {
+    display: block;
+}
+
+a .nav-icon--active {
+    display: none;
+}
+
+.mobile-nav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: var(--background-2);
+    min-height: 50px;
     display: flex;
-    gap: 1rem;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 1;
+}
+
+.nav-icon {
+    width: 30px;
+    height: 30px;
+}
+
+@media (min-width: 1024px) {
+
+    .mobile-nav {
+        display: none;
+    }
+
+    .header-desktop {
+        display: block;
+        background-color: var(--background-2);
+    }
+
 }
 </style>
-  
