@@ -49,6 +49,6 @@ export default {
     color: var(--color-text);
     cursor: pointer;
     width: fit-content;
-    margin-bottom: 1rem;
+    margin: 1rem 2rem 0 0;
 }
 </style>

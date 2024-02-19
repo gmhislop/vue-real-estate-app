@@ -275,4 +275,8 @@ select {
     color: red;
     font-size: 0.8rem;
 }
+
+h1 {
+    margin-bottom: 1rem;
+}
 </style>
