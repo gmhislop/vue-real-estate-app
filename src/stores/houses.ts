@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { fetchHousesData } from '@/api';
+import { fetchHousesData, fetchHouseById } from '@/api';
 
 export const useHousesStore = defineStore({
   id: 'houses',
@@ -19,6 +19,19 @@ export const useHousesStore = defineStore({
         } else {
           this.error = 'Error fetching houses data';
         }
+      } finally {
+        this.loading = false;
+      }
+    },
+    
+    async fetchHouseById(id:number) {
+      this.loading = true;
+      try {
+        const response = await fetchHouseById(id);
+        return response.data; 
+      } catch (error) {
+        console.error('Error fetching house by ID:', error);
+        throw error;
       } finally {
         this.loading = false;
       }

@@ -1,14 +1,12 @@
 <template>
     <div class="detail">
-        <router-link class="back-link" to="/"><img src="@/assets/ic_back_grey@3x.png" class="back-icon" alt="back" />Back to
-            overview</router-link>
+        <router-link class="back-link" to="/">
+            <img src="@/assets/ic_back_grey@3x.png" class="back-icon" alt="back" />
+            Back to overview
+        </router-link>
         <div class="content-wrapper">
             <div class="detail-container">
-                <Card v-for="(house, index) in houses" :key="index" :house="house" showFullDetails />
-            </div>
-            <div class="recommendation-container">
-                <h2>Recommended for you</h2>
-                <Card v-for="(house, index) in houses" :key="index" :house="house" hideButtonContainer />
+                <Card v-if="selectedHouse" :house="selectedHouse" showFullDetails />
             </div>
         </div>
     </div>
@@ -16,20 +14,33 @@
   
 <script>
 import Card from '@/components/Card.vue';
+import { ref, watch } from 'vue';
+import { useHousesStore } from '@/stores/houses';
+
 export default {
     name: 'Detail',
     components: {
         Card
     },
-    data() {
-        return {
-            shouldShowEmptyState: false,
-            houses: [ // Dummy data for houses
-                { address: '1234 Main St', price: '500.000', street: '1011AA Amsterdam', bathroom: 2, bedroom: 3, area: 100, image: 'https://via.placeholder.com/150', construction_date: '2020', garage: 2, description: 'Nestled in a serene neighborhood, this charming home offers a perfect blend of modern comfort and classic appeal. Featuring spacious interiors, a cozy living area, and a beautifully landscaped backyard, its an ideal retreat for relaxation and entertainment. With convenient access to amenities and scenic views, this home promises a delightful living experience.' },
+    setup() {
+        const housesStore = useHousesStore();
+        const selectedHouse = ref(null);
 
-            ]
+        watch(
+            () => $route.params.id,
+            async (newId) => {
+                try {
+                    selectedHouse.value = await housesStore.fetchHouseById(newId);
+                } catch (error) {
+                    console.error('Error fetching house by ID:', error);
+                }
+            }
+        );
+
+        return {
+            selectedHouse
         };
-    },
+    }
 };
 </script>
   
@@ -51,19 +62,6 @@ export default {
 
 .detail-container {
     display: flex;
-}
-
-.recommendation-container {
-    display: flex;
-    flex-direction: column;
-}
-
-h2 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    color: var(--color-text);
-    /* Updated color */
 }
 
 .back-icon {

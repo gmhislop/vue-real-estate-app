@@ -12,7 +12,7 @@ export const router = createRouter({
     { path: '/', component: Home },
     { path: '/about', component: About },
     { path: '/edit/:id', component: Edit, props: true },
-    { path: '/detail', component: Detail, props: true },
+    { path: '/houses/:id', component: Detail, props: true },
     { path: '/add', component: Add, props: true },
   ],
 });

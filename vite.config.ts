@@ -4,7 +4,7 @@ import { fileURLToPath, URL } from 'node:url';
 import vue from '@vitejs/plugin-vue';
 
 // Load environment variables from .env file
-dotenvConfig({ path: fileURLToPath(new URL('.env', import.meta.url)) });
+dotenvConfig({ path: fileURLToPath(new URL('.env.local', import.meta.url)) });
 
 // https://vitejs.dev/config/
 export default defineConfig({

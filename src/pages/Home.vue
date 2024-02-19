@@ -35,6 +35,7 @@
 <script>
 import EmptyState from '@/components/EmptyState.vue';
 import Card from '@/components/Card.vue';
+import { useHousesStore } from '@/stores/houses';
 
 export default {
     name: 'Home',
@@ -46,30 +47,12 @@ export default {
         return {
             shouldShowEmptyState: false,
             sortBy: 'price',
-            filter: '',
-            houses: [ // Dummy data for houses
-                { address: '1234 Main St', price: '500.000', street: '1011AA Amsterdam', bathroom: 2, bedroom: 3, area: 100, image: 'https://via.placeholder.com/150', construction_date: '2020', garage: 2 },
-                { address: '5678 Elm St', price: '600.000', street: '1011AA Amsterdam', bathroom: 3, bedroom: 4, area: 120, image: 'https://via.placeholder.com/150', construction_date: '2021', garage: 2 },
-                { address: '91011 Oak St', price: '700.000', street: '1011AA Amsterdam', bathroom: 3, bedroom: 5, area: 150, image: 'https://via.placeholder.com/150', construction_date: '2019', garage: 2 },
-                { address: '5678 Elm St', price: '600.000', street: '1011AA Amsterdam', bathroom: 3, bedroom: 4, area: 120, image: 'https://via.placeholder.com/150', construction_date: '2021', garage: 2 },
-                { address: '91011 Oak St', price: '700.000', street: '1011AA Amsterdam', bathroom: 3, bedroom: 5, area: 150, image: 'https://via.placeholder.com/150', construction_date: '2019', garage: 2 }
-            ]
+            filter: ''
         };
-    },
-    methods: {
-        createNew() {
-            this.$router.push('/add');
-        },
-        setSortBy(option) {
-            this.sortBy = option;
-        },
-        clearFilter() {
-            this.filter = '';
-        }
     },
     computed: {
         filteredHouses() {
-            return this.houses.filter((house) =>
+            return useHousesStore().houses.filter((house) =>
                 Object.values(house).some((value) =>
                     typeof value === "string" && value.toLowerCase().includes(this.filter.toLowerCase())
                 )
@@ -82,6 +65,21 @@ export default {
         filteredHouses() {
             this.shouldShowEmptyState = this.filteredHouses.length === 0;
         },
+    },
+    methods: {
+        createNew() {
+
+        },
+        setSortBy(option) {
+            this.sortBy = option;
+        },
+        clearFilter() {
+            this.filter = '';
+        }
+    },
+    mounted() {
+        useHousesStore().fetchHouses();
+        console.log('Houses:', useHousesStore().houses);
     },
 };
 </script>

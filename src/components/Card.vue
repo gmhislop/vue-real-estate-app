@@ -1,11 +1,11 @@
 <template>
-    <div :class="['card-container']" :style="{ flexDirection: showFullDetails ? 'column' : 'row' }">
-        <img class="house-image" :src="house.image" :alt="house.address"
-            :style="{ width: showFullDetails ? '100%' : 'auto', height: showFullDetails ? '400px' : '100%', borderRadius: showFullDetails ? '0px' : '8px', padding: showFullDetails ? '0' : '1rem' }" />
+    <div v-if="!showFullDetails" class="card-container">
+        <img class="house-image" @click="detail" :src="house.image" :alt="house.street + house.houseNumber"
+            :style="{ borderRadius: showFullDetails ? '0px' : '8px', margin: showFullDetails ? '0' : '1rem' }" />
         <div class="detail-container">
             <div class="details">
                 <div v-if="showFullDetails">
-                    <h1>{{ house.address }}</h1>
+                    <h1>{{ house.location.street }}</h1>
                     <div class="full-detail-container">
                         <div class="fullDetails">
                             <h3>{{ house.street }}</h3>
@@ -14,18 +14,18 @@
                             <span class="properties-text"><img src="@/assets/ic_price@3x.png" class="propertiess"
                                     alt="price" />{{ house.price }}</span>
                             <span class="properties-text"><img src="@/assets/ic_size@3x.png" class="propertiess"
-                                    alt="size" />{{ house.area }} m²</span>
+                                    alt="size" />{{ house.size }} m²</span>
                             <span class="properties-text"><img src="@/assets/ic_construction_date@3x.png"
-                                    class="propertiess" alt="construction date" />Built in {{ house.construction_date
+                                    class="propertiess" alt="construction date" />Built in {{ house.constructionYear
                                     }}</span>
                         </div>
                         <div class="fullDetails">
                             <span class="properties-text"><img src="@/assets/ic_bed@3x.png" class="propertiess"
-                                    alt="bed" />{{ house.bedroom }}</span>
+                                    alt="bed" />{{ house.rooms.bedrooms }}</span>
                             <span class="properties-text"><img src="@/assets/ic_bath@3x.png" class="propertiess"
-                                    alt="bath" />{{ house.bathroom }}</span>
-                            <span class="properties-text"><img src="@/assets/ic_garage@3x.png" class="propertiess"
-                                    alt="garage" />{{ house.garage }} m²</span>
+                                    alt="bath" />{{ house.rooms.bathrooms }}</span>
+                            <span v-if="house.hasGarage" class="properties-text"><img src="@/assets/ic_garage@3x.png"
+                                    class="propertiess" alt="garage" />Yes</span>
                         </div>
                     </div>
                     <div class="fullDetails">
@@ -33,16 +33,77 @@
                     </div>
                 </div>
                 <div class="defaultDetails" v-else>
-                    <h2>{{ house.address }}</h2>
+                    <h2>{{ house.location.street }}</h2>
                     <h3>€ {{ house.price }}</h3>
-                    <p>{{ house.street }}</p>
+                    <div class="address-container">
+                        <p>{{ house.location.zip }}</p>
+                        <p>{{ house.location.city }}</p>
+                    </div>
+                    <div class="default-properties-container">
+                        <span class="properties-text"><img src="@/assets/ic_bed@3x.png" class="propertiess" alt="bed" />{{
+                            house.rooms.bedrooms }}</span>
+                        <span class="properties-text"><img src="@/assets/ic_bath@3x.png" class="propertiess" alt="bath" />{{
+                            house.rooms.bathrooms }}</span>
+                        <span class="properties-text"><img src="@/assets/ic_size@3x.png" class="propertiess" alt="size" />{{
+                            house.size }} m²</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="button-container" v-if="!hideButtonContainer">
+                <button @click="edit"><img src="@/assets/ic_edit@3x.png" class="icons" alt="Edit" /></button>
+                <button @click="showDeleteModal = true"><img src="@/assets/ic_delete@3x.png" class="icons"
+                        alt="Delete" /></button>
+            </div>
+            <delete-modal :show-modal="showDeleteModal" @cancel="cancelDelete" @confirm="confirmDelete" />
+        </div>
+    </div>
+    <div v-else :class="['card-container']" :style="{ flexDirection: showFullDetails ? 'column' : 'row' }">
+        <img class="house-image" :src="house.image" :alt="house.street + house.houseNumber"
+            :style="{ borderRadius: showFullDetails ? '0px' : '8px', margin: showFullDetails ? '0' : '1rem' }" />
+        <div class="detail-container">
+            <div class="details">
+                <div v-if="showFullDetails">
+                    <h1>{{ house.location.street }}</h1>
+                    <div class="full-detail-container">
+                        <div class="fullDetails">
+                            <h3>{{ house.street }}</h3>
+                        </div>
+                        <div class="fullDetails">
+                            <span class="properties-text"><img src="@/assets/ic_price@3x.png" class="propertiess"
+                                    alt="price" />{{ house.price }}</span>
+                            <span class="properties-text"><img src="@/assets/ic_size@3x.png" class="propertiess"
+                                    alt="size" />{{ house.size }} m²</span>
+                            <span class="properties-text"><img src="@/assets/ic_construction_date@3x.png"
+                                    class="propertiess" alt="construction date" />Built in {{ house.constructionYear
+                                    }}</span>
+                        </div>
+                        <div class="fullDetails">
+                            <span class="properties-text"><img src="@/assets/ic_bed@3x.png" class="propertiess"
+                                    alt="bed" />{{ house.rooms.bedrooms }}</span>
+                            <span class="properties-text"><img src="@/assets/ic_bath@3x.png" class="propertiess"
+                                    alt="bath" />{{ house.rooms.bathrooms }}</span>
+                            <span v-if="house.hasGarage" class="properties-text"><img src="@/assets/ic_garage@3x.png"
+                                    class="propertiess" alt="garage" />Yes</span>
+                        </div>
+                    </div>
+                    <div class="fullDetails">
+                        <p class="description listing-information">{{ house.description }}</p>
+                    </div>
+                </div>
+                <div class="defaultDetails" v-else>
+                    <h2>{{ house.location.street }}</h2>
+                    <div class="address-container">
+                        <p>{{ house.location.zip }}</p>
+                        <p>{{ house.location.city }}</p>
+                    </div>
                     <div class="properties-container">
                         <span class="properties-text"><img src="@/assets/ic_bed@3x.png" class="propertiess" alt="bed" />{{
-                            house.bedroom }}</span>
+                            house.rooms.bedrooms }}</span>
                         <span class="properties-text"><img src="@/assets/ic_bath@3x.png" class="propertiess" alt="bath" />{{
-                            house.bathroom }}</span>
+                            house.rooms.bathrooms }}</span>
                         <span class="properties-text"><img src="@/assets/ic_size@3x.png" class="propertiess" alt="size" />{{
-                            house.area }} m²</span>
+                            house.size }} m²</span>
                     </div>
                 </div>
             </div>
@@ -59,14 +120,44 @@
   
 <script>
 import DeleteModal from './DeleteModal.vue';
+import { defineComponent } from 'vue';
+import { deleteHouseById } from '@/api';
 
-export default {
+// type House = {
+//     id: number;
+//     image: string;
+//     location: {
+//         street: string;
+//         houseNumber: string;
+//         houseNumberAddition?: string;
+//         city: string;
+//         zip: string;
+//     };
+//     price: number;
+//     size: number;
+//     constructionYear: number;
+//     rooms: {
+//         bedroom: number;
+//         bathroom: number;
+//     },
+//     hasGarage: boolean;
+//     description: string;
+// };
+
+export default defineComponent({
+    name: 'HouseCard',
     components: {
         DeleteModal
     },
     props: {
-        house: Object,
-        showFullDetails: Boolean,
+        house: {
+            type: Object,
+            required: true
+        },
+        showFullDetails: {
+            type: Boolean,
+            default: false
+        },
         hideButtonContainer: {
             type: Boolean,
             default: false
@@ -82,23 +173,29 @@ export default {
             this.$router.push(`/edit/${this.house.id}`);
         },
         cancelDelete() {
-            // Cancel deletion
             this.showDeleteModal = false;
         },
-        confirmDelete() {
-            // Confirm deletion
-            // Implement logic to delete the house
-            console.log('Deleting house:', this.house);
-            this.showDeleteModal = false;
+        async confirmDelete() {
+            try {
+                console.log('Deleting house:', this.house);
+                await deleteHouseById(this.house.id);
+                console.log('House deleted successfully');
+            } catch (error) {
+                console.error('Error deleting house:', error);
+            } finally {
+                this.showDeleteModal = false;
+            }
+        },
+        detail() {
+            this.$router.push(`/houses/${this.house.id}`);
         }
     }
-};
+});
 </script>
   
 <style scoped>
 .card-container {
     display: flex;
-    width: 100%;
     min-width: 500px;
     background-color: var(--color-background-2);
     border-radius: 8px;
@@ -106,9 +203,11 @@ export default {
 }
 
 .house-image {
-    border-radius: 8px;
-    height: 400px;
     object-fit: cover;
+    width: 150px;
+    height: 150px;
+    border-radius: 8px;
+    cursor: pointer;
 }
 
 .button-container {
@@ -126,9 +225,16 @@ export default {
     margin-right: 0.5rem;
 }
 
-.properties-container {
+.address-container {
+    display: flex;
+    gap: 0.5rem;
+    color: var(--color-tertiary);
+}
+
+.default-properties-container {
     display: flex;
     gap: 1rem;
+    margin-top: auto;
     color: var(--color-tertiary);
     align-items: center;
 }
@@ -177,8 +283,10 @@ button {
 .defaultDetails {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
     color: var(--color-tertiary);
+    gap: 0.5rem;
+    height: 100%;
+
 }
 </style>
   

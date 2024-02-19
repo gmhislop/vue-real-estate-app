@@ -2,28 +2,29 @@
     <div>
         <h1>{{ formTitle }}</h1>
         <form @submit.prevent="submitForm">
-            <div class="form-group" :class="{ 'has-error': errors.street_name }">
-                <label for="street_name">Street name*</label>
-                <input type="text" id="street_name" placeholder="Enter the street name" v-model="formData.street_name"
-                    required />
-                <span v-if="errors.street_name" class="error-message">{{ errors.street_name }}</span>
+            <div class="form-group" :class="{ 'has-error': errors.street }">
+                <label for="street">Street name*</label>
+                <input type="text" id="street" placeholder="Enter the street name" v-model="formData.street" required />
+                <span v-if="errors.street" class="error-message">{{ errors.street }}</span>
             </div>
             <div class="form-group-inline">
                 <div class="form-group">
-                    <label for="house_number">House number*</label>
-                    <input type="text" id="house_number" placeholder="Enter house number" v-model="formData.house_number"
+                    <label for="houseNumber">House number*</label>
+                    <input type="text" id="houseNumber" placeholder="Enter house number" v-model="formData.houseNumber"
                         required />
-                    <span v-if="errors.house_number" class="error-message">{{ errors.house_number }}</span>
+                    <span v-if="errors.houseNumber" class="error-message">{{ errors.houseNumber }}</span>
                 </div>
                 <div class="form-group">
-                    <label for="addition">Addition (optional)</label>
-                    <input type="text" id="addition" placeholder="e.g. A" v-model="formData.addition" />
+                    <label for="houseNumberAddition">Addition (optional)</label>
+                    <input type="text" id="houseNumberAddition" placeholder="e.g. A"
+                        v-model="formData.houseNumberAddition" />
+                    <span v-if="errors.houseNumberAddition" class="error-message">{{ errors.houseNumberAddition }}</span>
                 </div>
             </div>
             <div class="form-group">
-                <label for="postal_code">Postal code*</label>
-                <input type="text" id="postal_code" placeholder="e.g. 1000AA" v-model="formData.postal_code" required />
-                <span v-if="errors.postal_code" class="error-message">{{ errors.postal_code }}</span>
+                <label for="zip">Postal code*</label>
+                <input type="text" id="zip" placeholder="e.g. 1000AA" v-model="formData.zip" required />
+                <span v-if="errors.zip" class="error-message">{{ errors.zip }}</span>
             </div>
             <div class="form-group">
                 <label for="city">City*</label>
@@ -57,32 +58,32 @@
                     <span v-if="errors.size" class="error-message">{{ errors.size }}</span>
                 </div>
                 <div class="form-group">
-                    <label for="garage">Garage*</label>
-                    <select id="garage" v-model="formData.garage" required>
-                        <option value="">Select</option>
-                        <option value="yes">Yes</option>
-                        <option value="no">No</option>
+                    <label for="hasGarage">Garage*</label>
+                    <select id="hasGarage" v-model="formData.hasGarage" required>
+                        <option value="" disabled selected>Select</option>
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
                     </select>
-                    <span v-if="errors.garage" class="error-message">{{ errors.garage }}</span>
+                    <span v-if="errors.hasGarage" class="error-message">{{ errors.hasGarage }}</span>
                 </div>
             </div>
             <div class="form-group-inline">
                 <div class="form-group">
-                    <label for="bedroom">Bedrooms*</label>
-                    <input type="text" id="bedroom" placeholder="Enter amount" v-model="formData.bedroom" required />
-                    <span v-if="errors.bedroom" class="error-message">{{ errors.bedroom }}</span>
+                    <label for="bedrooms">Bedrooms*</label>
+                    <input type="text" id="bedrooms" placeholder="Enter amount" v-model="formData.bedrooms" required />
+                    <span v-if="errors.bedrooms" class="error-message">{{ errors.bedrooms }}</span>
                 </div>
                 <div class="form-group">
-                    <label for="bathroom">Bathrooms*</label>
-                    <input type="text" id="bathroom" placeholder="Enter amount" v-model="formData.bathroom" required />
-                    <span v-if="errors.bathroom" class="error-message">{{ errors.bathroom }}</span>
+                    <label for="bathrooms">Bathrooms*</label>
+                    <input type="text" id="bathrooms" placeholder="Enter amount" v-model="formData.bathrooms" required />
+                    <span v-if="errors.bathrooms" class="error-message">{{ errors.bathrooms }}</span>
                 </div>
             </div>
             <div class="form-group">
-                <label for="construction_date">Construction date*</label>
-                <input type="text" id="construction_date" placeholder="e.g. 1990" v-model="formData.construction_date"
+                <label for="constructionYear">Construction year*</label>
+                <input type="text" id="constructionYear" placeholder="e.g. 1990" v-model="formData.constructionYear"
                     required />
-                <span v-if="errors.construction_date" class="error-message">{{ errors.construction_date }}</span>
+                <span v-if="errors.constructionYear" class="error-message">{{ errors.constructionYear }}</span>
             </div>
             <div class="form-group">
                 <label for="description">Description*</label>
@@ -90,7 +91,7 @@
                     required></textarea>
                 <span v-if="errors.description" class="error-message">{{ errors.description }}</span>
             </div>
-            <button class="submit-button" type="submit">{{ submitButtonText }}</button>
+            <button class="submit-button" type="submit" @click="submitForm">{{ submitButtonText }}</button>
         </form>
     </div>
 </template>
@@ -98,47 +99,54 @@
 <script>
 import { ref, computed } from 'vue';
 import validateForm from '@/helpers/validation.ts';
+import { useHousesStore } from '@/stores/houses';
+import { uploadHouseImage, createHouse } from '@/api';
 
 export default {
     name: 'HousingForm',
     props: {
-        listing: Object
+        house: Object
     },
     setup(props) {
+        const housesStore = useHousesStore();
+
         const formData = ref({
-            street_name: props.listing ? props.listing.street_name : '',
-            house_number: props.listing ? props.listing.house_number : '',
-            addition: props.listing ? props.listing.addition : '',
-            postal_code: props.listing ? props.listing.postal_code : '',
-            city: props.listing ? props.listing.city : '',
-            price: props.listing ? props.listing.price : '',
-            size: props.listing ? props.listing.size : '',
-            garage: props.listing ? props.listing.garage : '',
-            bedroom: props.listing ? props.listing.bedroom : '',
-            bathroom: props.listing ? props.listing.bathroom : '',
-            construction_date: props.listing ? props.listing.construction_date : '',
-            description: props.listing ? props.listing.description : ''
+            street: props.house ? props.house.location.street : '',
+            houseNumber: props.house ? props.house.location.houseNumber : '',
+            additionHousenumber: props.house ? props.house.loction.additionHousenumber : '',
+            zip: props.house ? props.house.location.zip : '',
+            city: props.house ? props.house.location.city : '',
+            price: props.house ? props.house.price : '',
+            size: props.house ? props.house.size : '',
+            hasGarage: props.house ? props.house.hasGarage : false,
+            bedrooms: props.house ? props.house.rooms.bedrooms : '',
+            bathrooms: props.house ? props.house.rooms.bathrooms : '',
+            constructionYear: props.house ? props.house.constructionYear : '',
+            description: props.house ? props.house.description : '',
+            image: null
         });
 
-        const formTitle = computed(() => props.listing ? 'Edit listing' : 'Create new listing');
-        const submitButtonText = computed(() => props.listing ? 'SAVE' : 'POST');
+        const formTitle = computed(() => props.house ? 'Edit listing' : 'Create new listing');
+        const submitButtonText = computed(() => props.house ? 'SAVE' : 'POST');
 
         const errors = ref({
-            street_name: '',
-            house_number: '',
-            postal_code: '',
+            street: '',
+            houseNumber: '',
+            houseNumberAddition: '',
+            zip: '',
             city: '',
             price: '',
             size: '',
-            garage: '',
-            bedroom: '',
-            bathroom: '',
-            construction_date: '',
-            description: ''
+            hasGarage: '',
+            bedrooms: '',
+            bathrooms: '',
+            constructionYear: '',
+            description: '',
+            image: null
         });
 
         const deleteImage = () => {
-            formData.value.image = null; // Reset image to null
+            formData.value.image = null;
         };
 
         const handleImageUpload = (event) => {
@@ -154,11 +162,31 @@ export default {
             }
         };
 
-        const submitForm = () => {
+        const submitForm = async () => {
             validateForm();
+
             if (Object.keys(errors.value).length === 0) {
-                console.log('Form submitted with data:', formData.value);
-                // Additional logic for submitting form
+                try {
+                    let newHouse;
+
+                    if (props.house) {
+
+                    } else {
+                        // Create new house
+                        newHouse = await createHouse(formData.value);
+                    }
+
+                    if (formData.value.image && newHouse) {
+                        // Upload image for the newly created house
+                        await uploadHouseImage(newHouse.id, formData.value.image);
+                    }
+
+                    console.log('New house created:', newHouse);
+
+                } catch (error) {
+                    console.error('Error creating/editing house:', error);
+                    alert('Failed to create/edit house. Please try again later.');
+                }
             } else {
                 console.error('Form has validation errors:', errors.value);
                 alert('Form has validation errors. Please check the form for more details.');
@@ -176,6 +204,7 @@ export default {
         };
     }
 };
+
 </script>
 
 <style scoped>
@@ -187,7 +216,7 @@ export default {
     justify-content: center;
     width: 5rem;
     height: 5rem;
-    border: 1px dashed #000000;
+    border: 1px dashed (var(--color-text));
     border-spacing: 2rem;
     margin-top: 1rem;
 }
@@ -251,7 +280,7 @@ select {
     display: flex;
     align-items: center;
     margin-left: auto;
-    background-color: #EB5440;
+    background-color: var(--color-primary);
     color: white;
     padding: 0.5rem 4rem;
     border: none;
