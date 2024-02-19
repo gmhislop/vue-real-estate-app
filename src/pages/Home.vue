@@ -129,9 +129,10 @@ h2 {
 
 .search-input {
     border: none;
-    padding: 1rem 0rem 1rem 6vw;
     border-radius: 4px;
     background-color: var(--color-tertiary-light);
+    min-width: 20vw;
+    padding: 1rem 3rem;
 }
 
 .clear-icon {
