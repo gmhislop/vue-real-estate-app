@@ -3,7 +3,7 @@
     <slot></slot>
   </div>
 </template>
-  
+
 <style scoped>
 .detail-container {
   display: flex;

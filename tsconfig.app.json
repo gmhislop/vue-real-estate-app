@@ -10,7 +10,6 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
-      "@components/*": ["./src/components/*"]
     },
     "allowJs": true
   }
