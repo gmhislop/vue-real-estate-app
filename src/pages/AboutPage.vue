@@ -30,15 +30,10 @@
   </main>
 </template>
 
-<script>
+<script setup lang="ts">
 import Heading from '@/components/atoms/typography/Heading.vue';
 import Paragraph from '@/components/atoms/typography/Paragraph.vue';
 import Layout from '@/components/templates/Layout/Layout.vue';
-
-export default {
-  name: 'About',
-  components: { Layout }
-}
 </script>
 
 <style scoped>
