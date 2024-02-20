@@ -1,0 +1,6 @@
+export * from './DetailsContainer'
+export * from './Icons/Icon.vue'
+export * from './Input/Input.vue'
+export * from './Label/Label.vue'
+export * from './typography/Heading.vue'
+export * from './typography/Paragraph.vue'

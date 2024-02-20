@@ -1,5 +1,5 @@
 <template>
-    <BaseLabel>{{ label }}</BaseLabel>
+    <Label>{{ label }}</Label>
     <label class="upload-image-container" :class="{ 'input--error': errors.length > 0 }" for="image">
         <span class="image-upload-block" v-if="!previewImageUrl">
             <img class="upload-house-icon" src="@/assets/upload.png" alt="Upload house" />
@@ -8,15 +8,14 @@
         <img class="cancel-uploaded-image-icon" src="@/assets/clear_white.png" v-if="previewImageUrl" @click="clearImage"
             alt="Clear uploaded image" />
     </label>
-    <TextParagraph variant="error-message" v-for="error in errors" :key="error.$uid">
+    <Paragraph variant="error-message" v-for="error in errors" :key="error.$uid">
         {{ error.$message }}
-    </TextParagraph>
+    </Paragraph>
     <input id="image" type="file" ref="file" @change="displayPreviewImage" hidden />
 </template>
   
 <script setup>
-import Label from "@/atoms/Label/Label.vue";
-import TextParagraph from "@/atoms/Typography/Paragraph.vue";
+import { Label, Paragraph } from "@components/atoms";
 
 defineProps({
     label: String,

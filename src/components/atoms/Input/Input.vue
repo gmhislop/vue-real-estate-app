@@ -12,8 +12,7 @@
 </template>
   
 <script setup>
-import Label from '../atoms/Label.vue';
-import Paragraph from '../typography/Paragraph.vue';
+import { Paragraph, Label } from '@components/atoms';
 
 const { label, modelValue, errors } = props;
 const hasErrors = errors.length > 0;

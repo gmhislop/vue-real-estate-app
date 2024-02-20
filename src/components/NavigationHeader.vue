@@ -13,13 +13,14 @@
     <!-- Mobile version -->
     <nav class="mobile-nav" aria-label="Main navigation">
         <RouterLink :to="{ name: HOME_PAGE }">
-            <img alt="House icon" class="nav-icon nav-icon--inactive" src="@/assets/mobile_navigation_home.png" />
-            <img alt="House icon" class="nav-icon nav-icon--active" src="@/assets/mobile_navigation_home_active.png" />
+            <img alt="House icon" class="nav-icon nav-icon--inactive" src="@/assets/ic_mobile_navigarion_home@3x.png" />
+            <img alt="House icon" class="nav-icon nav-icon--active"
+                src="@/assets/ic_mobile_navigarion_home_active@3x.png" />
         </RouterLink>
         <RouterLink :to="{ name: ABOUT_PAGE }">
-            <img alt="Information icon" class="nav-icon nav-icon--inactive" src="@/assets/mobile_navigation_info.png" />
-            <img alt="Information icon" class="nav-icon nav-icon--active"
-                src="@/assets/mobile_navigation_info_active.png" />
+            <img alt="Information icon" class="nav-icon nav-icon--inactive"
+                src="@/assets/ic_mobile_navigarion_info@3x.png" />
+            <img alt="Information icon" class="nav-icon nav-icon--active" src="@/ic_mobile_navigarion_info_active@3x.png" />
         </RouterLink>
     </nav>
 </template>
@@ -34,11 +35,11 @@ import { HOME_PAGE, ABOUT_PAGE } from '@/router';
 
 .desktop-nav {
     max-width: 1440px;
-    padding: 16px 165px 16px 165px;
+    padding: 1rem 10.3125rem 1rem 10.3125rem;
     margin: auto;
     display: flex;
     align-items: center;
-    gap: 64px;
+    gap: 4rem;
 }
 
 .logo {
@@ -79,7 +80,7 @@ a .nav-icon--active {
     bottom: 0;
     width: 100%;
     background-color: var(--background-2);
-    min-height: 50px;
+    min-height: 3.125rem;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -87,8 +88,8 @@ a .nav-icon--active {
 }
 
 .nav-icon {
-    width: 30px;
-    height: 30px;
+    width: 1.925rem;
+    height: 1.925rem;
 }
 
 @media (min-width: 1024px) {

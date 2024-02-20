@@ -1,11 +1,10 @@
 <template>
     <article class="house-card">
-        <img alt="Picture of a house" class="house-img" :src="house.image">
+        <img alt="Picture of a house" class="house-img" :src="house.image" />
         <div class="house-info-container">
             <Heading>{{ house.location.street }}</Heading>
             <Paragraph>{{ formatCurrency(house.price) }}</Paragraph>
-            <Paragraph variant="semi-transparent">{{ house.location.zip }} {{ house.location.city
-            }}</Paragraph>
+            <Paragraph variant="paragraph-light">{{ house.location.zip }} {{ house.location.city }}</Paragraph>
             <DetailsContainer class="house-DetailsContainer">
                 <DetailContainer>
                     <Icon alt="Bedroom icon" url="/src/assets/ic_bed@3x.png" />
@@ -30,32 +29,28 @@
             @click="displayDeleteWarning" />
     </article>
 </template>
-  
+
 <script setup>
 import { useHousesStore } from '@/stores/houses'
-import { defineProps } from 'vue';
-import formatCurrency from '@/utils/formatCurrency';
-import { EDIT_PAGE } from '@/router';
-import Paragraph from '../../atoms/typography/Paragraph.vue';
-import Heading from '../../atoms/typography/Heading.vue';
-import DetailContainer from '../../atoms/DetailContainer.vue';
-import DetailsContainer from '../../atoms/DetailsContainer.vue';
-import Icon from '../../atoms/Icon.vue';
+import { defineProps } from 'vue'
+import formatCurrency from '@/utils/formatCurrency'
+import { EDIT_PAGE } from '@/router'
+import { Paragraph, DetailContainer, Icon, DetailsContainer, Heading } from '@components/atoms'
 
-const storeHouses = useHousesStore();
+const storeHouses = useHousesStore()
 const props = defineProps({
     house: {
         type: Object,
         required: true
     }
-});
+})
 
 function displayDeleteWarning(event) {
-    event.preventDefault();
-    storeHouses.displayDeleteWarning(props.house.id);
+    event.preventDefault()
+    storeHouses.displayDeleteWarning(props.house.id)
 }
 </script>
-  
+
 <style scoped>
 .house-card {
     position: relative;
@@ -94,7 +89,7 @@ function displayDeleteWarning(event) {
 }
 
 .edit-icon {
-    right: 5.0rem;
+    right: 5rem;
 }
 
 .delete-icon {
@@ -131,4 +126,3 @@ function displayDeleteWarning(event) {
     }
 }
 </style>
-  
