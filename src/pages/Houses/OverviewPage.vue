@@ -20,9 +20,7 @@
 
       <FilterControls />
 
-      <Heading as="h2" class="results-found" v-if="storeHouses.displayResultCount"
-        >{{ storeHouses.resultCount }} results found</Heading
-      >
+      <Heading as="h2" class="results-found" v-if="storeHouses.displayResultCount">{{ storeHouses.resultCount }} results found</Heading>
 
       <NotFound v-if="storeHouses.noResults" />
 
