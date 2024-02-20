@@ -1,59 +1,72 @@
 <template>
-    <div class="about">
-        <h1>About DTT Real Estate</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-            magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat. <br /><br />
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-        </p>
-        <h2>Design and Development</h2>
-        <div class="logo-container">
-            <img src="@/assets/dtt-logo.png" alt="DTT Logo" width="100" />
-            <div class="link-container">
-                <p>By DTT</p>
-                <a to="https://www.d-tt.nl">www.d-tt.nl</a>
-            </div>
+  <main>
+    <Layout>
+      <div class="about-container">
+        <Heading as="h2">
+          About DTT Real Estate
+        </Heading>
+        <Paragraph>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+          labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+          laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+          voluptate velit esse cillum dolore eu fugiat. <br /><br />
+          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+          commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+          dolore eu fugiat
+        </Paragraph>
+      </div>
+
+      <div class="about-container">
+        <Heading as="h2">Design and Development</Heading>
+        <div class="info-container">
+          <img src="@/assets/dtt-logo.png" alt="DTT Logo" class="logo-image" />
+          <div class="link-container">
+            <Paragraph>By DTT</Paragraph>
+            <a href="https://www.d-tt.nl" class="about-link">www.d-tt.nl</a>
+          </div>
         </div>
-    </div>
+      </div>
+    </Layout>
+  </main>
 </template>
-  
+
 <script>
+import { Paragraph, Heading } from '@/components/atoms';
+import Layout from '@/components/templates';
+
 export default {
-    name: 'About'
-};
+  name: 'About',
+  components: { Layout }
+}
 </script>
-  
+
 <style scoped>
-.about {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 100%;
-    padding: 2rem 10vw;
-    gap: 2rem;
+.about-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin: 1.5rem 0;
 }
 
-h1,
-h2 {
-    font-size: 24px;
-    font-weight: 700;
+.logo-image {
+  width: 6.25rem;
 }
 
-link-container {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+.info-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
-img {
-    width: 300px;
+.link-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
-.logo-container {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+.about-link {
+  text-decoration: none;
+  color: var(--text-hyperlink);
+  font-size: var(--listing-information);
 }
 </style>
-  
