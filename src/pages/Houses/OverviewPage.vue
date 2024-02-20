@@ -39,9 +39,11 @@
 
 <script setup>
 import { useHousesStore } from '@/stores/houses';
-import { HouseCard, FilterControls, NotFound } from '@/components/molecules';
-import { Layout } from '@/components/templates';
-import { Heading } from '@/components/atoms';
+import  NotFound  from '@/components/molecules/Notfound/NotFound.vue';
+import  FilterControls  from '@/components/molecules/FilterControls/FilterControls.vue';
+import  HouseCard  from '@/components/molecules/HouseCard/HouseCard.vue';
+import  Layout from '@/components/templates/Layout/Layout.vue';
+import  Heading  from '@/components/atoms/typography/Heading.vue';
 import { DETAIL_PAGE, CREATE_PAGE } from '@/router';
 
 const storeHouses = useHousesStore()

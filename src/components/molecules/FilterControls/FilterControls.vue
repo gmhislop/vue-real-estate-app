@@ -2,8 +2,8 @@
     <header class="filters">
         <div class="relative-container">
             <input @input="updateSearch" :value="search" class="search-input" placeholder="Search for a house" />
-            <img class="searchbar-icon icon-search" src="@/assets/search.png" alt="search" />
-            <img @click="clearSearch" v-if="search" class="searchbar-icon icon-clear" src="@/assets/clear_grey.png"
+            <img class="searchbar-icon icon-search" src="@/assets/ic_search@3x.png" alt="search" />
+            <img @click="clearSearch" v-if="search" class="searchbar-icon icon-clear" src="@/assets/ic_clear@3x.png"
                 alt="clear" />
         </div>
         <div class="button-container" v-if="hasFilteredHouses">

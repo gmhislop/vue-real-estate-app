@@ -15,7 +15,8 @@
 
 <script setup>
 import { useHousesStore } from '@/stores/houses';
-import { Paragraph, Heading } from '@/components/atoms';
+import Paragraph from '@/components/atoms/typography/Heading.vue';
+import Heading from '@/components/atoms/typography/Paragraph.vue';
 import { useRouter, useRoute } from 'vue-router';
 import { DETAIL_PAGE, HOME_PAGE } from '@/router';
 

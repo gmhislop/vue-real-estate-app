@@ -15,7 +15,8 @@
 </template>
   
 <script setup>
-import { Label, Paragraph } from "@/components/atoms";
+import Paragraph from "@/components/atoms/typography/Paragraph.vue";
+import Label from "@/components/atoms/Label/Label.vue";
 
 defineProps({
     label: String,

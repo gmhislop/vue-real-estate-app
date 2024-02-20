@@ -16,4 +16,5 @@ export type House = {
     constructionYear: number;
     description: string;
     image: string | null;
+    madeByMe: boolean;
   }

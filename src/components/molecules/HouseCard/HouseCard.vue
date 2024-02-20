@@ -1,9 +1,9 @@
 <template>
   <article class="house-card">
-    <img alt="Picture of a house" class="house-image" :src="house.image" />
+    <img alt="Picture of a house" class="house-image" :src="house.image ? house.image : ' ' " />
     <div class="house-info-container">
       <Heading>{{ house.location.street }}</Heading>
-      <Paragraph>{{ formatCurrency(house.price) }}</Paragraph>
+      <Paragraph>{{ formattedPrice }}</Paragraph>
       <Paragraph variant="paragraph-light"
         >{{ house.location.zip }} {{ house.location.city }}</Paragraph
       >
@@ -37,25 +37,30 @@
   </article>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { useHousesStore } from '@/stores/houses'
 import { defineProps } from 'vue'
-import formatCurrency from '@/utils/formatCurrency'
+import { formatCurrency} from '@/helpers/formatCurrency'
 import { EDIT_PAGE } from '@/router'
-import { Paragraph, DetailContainer, Icon, DetailsContainer, Heading } from '@/components/atoms'
+import Heading from '@/components/atoms/typography/Heading.vue'
+import Paragraph from '@/components/atoms/typography/Paragraph.vue'
+import DetailsContainer from '@/components/atoms/DetailsContainer/DetailsContainer.vue'
+import DetailContainer from '@/components/atoms/DetailsContainer/DetailContainer.vue'
+import Icon from '@/components/atoms/Icons/Icon.vue'
+import type { House } from '@/types/types'
 
 const storeHouses = useHousesStore()
-const props = defineProps({
-  house: {
-    type: Object,
-    required: true
-  }
-})
+const props = defineProps<{
+  house: House;
+}>()
 
-function displayDeleteWarning(event) {
+function displayDeleteWarning(event: Event) {
   event.preventDefault()
   storeHouses.displayDeleteWarning(props.house.id)
 }
+
+const formattedPrice = formatCurrency(props.house.price);
+
 </script>
 
 <style scoped>

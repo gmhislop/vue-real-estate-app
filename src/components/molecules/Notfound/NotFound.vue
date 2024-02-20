@@ -6,7 +6,7 @@
   </template>
   
   <script setup>
-    import { Paragraph } from '@/components/atoms';
+    import Paragraph from '@/components/atoms/typography/Paragraph.vue'
   </script>
   
   <style scoped>

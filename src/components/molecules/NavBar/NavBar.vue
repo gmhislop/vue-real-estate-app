@@ -33,7 +33,7 @@
       <img
         alt="Information icon"
         class="nav-icon nav-icon--active"
-        src="@/ic_mobile_navigarion_info_active@3x.png"
+        src="@/assets/ic_mobile_navigarion_info_active@3x.png"
       />
     </RouterLink>
   </nav>

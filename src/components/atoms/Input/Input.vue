@@ -25,7 +25,8 @@
 </template>
 
 <script setup>
-import { Paragraph, Label } from '@/components/atoms'
+import Paragraph from '@/components/atoms/typography/Paragraph.vue'
+import Label from '@/components/atoms/Label/Label.vue'
 
 const { label, modelValue, errors } = props
 const hasErrors = errors.length > 0
