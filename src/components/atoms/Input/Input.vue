@@ -25,7 +25,7 @@
 </template>
 
 <script setup>
-import { Paragraph, Label } from '@components/atoms'
+import { Paragraph, Label } from '@/components/atoms'
 
 const { label, modelValue, errors } = props
 const hasErrors = errors.length > 0

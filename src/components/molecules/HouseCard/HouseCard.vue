@@ -42,7 +42,7 @@ import { useHousesStore } from '@/stores/houses'
 import { defineProps } from 'vue'
 import formatCurrency from '@/utils/formatCurrency'
 import { EDIT_PAGE } from '@/router'
-import { Paragraph, DetailContainer, Icon, DetailsContainer, Heading } from '@components/atoms'
+import { Paragraph, DetailContainer, Icon, DetailsContainer, Heading } from '@/components/atoms'
 
 const storeHouses = useHousesStore()
 const props = defineProps({

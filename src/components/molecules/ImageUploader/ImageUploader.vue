@@ -15,7 +15,7 @@
 </template>
   
 <script setup>
-import { Label, Paragraph } from "@components/atoms";
+import { Label, Paragraph } from "@/components/atoms";
 
 defineProps({
     label: String,
