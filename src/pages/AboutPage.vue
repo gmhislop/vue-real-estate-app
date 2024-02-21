@@ -45,7 +45,7 @@ import Layout from '@/components/templates/Layout/Layout.vue';
 }
 
 .logo-image {
-  width: 6.25rem;
+  width: 10.5rem;
 }
 
 .info-container {

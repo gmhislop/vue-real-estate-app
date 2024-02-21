@@ -48,7 +48,7 @@ import { DETAIL_PAGE, CREATE_PAGE } from '@/router';
 
 const storeHouses = useHousesStore()
 
-if (storeHouses.properties.length === 0) {
+if (storeHouses.houses.length === 0) {
   await storeHouses.fill()
 }
 </script>
@@ -109,8 +109,8 @@ if (storeHouses.properties.length === 0) {
     font-family: var(--headers-buttons-bold);
     font-size: var(--buttons-tabs-text);
     font-weight: var(--bold);
-    color: var(--background-2);
-    background-color: var(--primary);
+    color: var(--color-text-tertiary);
+    background-color: var(--color-primary);
     border: none;
     border-radius: 0.625rem;
     padding: 0;
