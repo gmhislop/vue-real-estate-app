@@ -24,15 +24,31 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import Paragraph from '@/components/atoms/typography/Paragraph.vue'
 import Label from '@/components/atoms/Label/Label.vue'
 
-const { label, modelValue, errors } = props
+interface ErrorObject {
+  $uid: string;
+  $message: string;
+}
+
+interface Props {
+  label: string;
+  modelValue: string;
+  errors: ErrorObject[];
+  updateModel: (value: string) => void;
+}
+
+const props = defineProps<Props>()
+
+const { label, modelValue, errors, updateModel } = props
+
 const hasErrors = errors.length > 0
 
-const updateModelValue = (event) => {
-  emit('update:modelValue', event.target.value)
+const updateModelValue = (event: Event) => {
+  const inputValue = (event.target as HTMLInputElement).value;
+  updateModel(inputValue);
 }
 
 const errorIds = errors.map((error) => error.$uid).join(' ')

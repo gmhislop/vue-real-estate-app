@@ -39,9 +39,11 @@
   </nav>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { HOME_PAGE, ABOUT_PAGE } from '@/router'
+import { RouterLink } from 'vue-router'
 </script>
+
 <style scoped>
 .header-desktop {
   display: none;

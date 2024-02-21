@@ -15,15 +15,20 @@
     </header>
 </template>
   
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue';
 import { useHousesStore } from '@/stores/houses';
 
-const search = ref('');
+interface House {
+  price: number;
+  size: number;
+}
+
+const search = ref<string>('');
 const storeHouses = useHousesStore();
 
-const updateSearch = (event) => {
-    search.value = event.target.value;
+const updateSearch = (event: Event) => {
+    search.value = (event.target as HTMLInputElement).value;
     storeHouses.updateSearch(search.value);
 };
 
@@ -32,11 +37,14 @@ const clearSearch = () => {
     storeHouses.clearSearch();
 };
 
-const updateSortBy = (option) => {
+const updateSortBy = (option: keyof House) => {
     storeHouses.updateSortBy(option);
 };
 
 const hasFilteredHouses = storeHouses.filteredHouses.length > 0;
+
+const sortBy = ref<string>('');
+
 </script>
   
 <style scoped>
@@ -141,4 +149,3 @@ const hasFilteredHouses = storeHouses.filteredHouses.length > 0;
     }
 }
 </style>
-  

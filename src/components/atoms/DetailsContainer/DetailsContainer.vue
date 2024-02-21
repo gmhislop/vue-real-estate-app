@@ -4,6 +4,8 @@
   </div>
 </template>
 
+<script setup lang="ts"></script>
+
 <style scoped>
 .details-container {
   display: flex;

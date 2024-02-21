@@ -5,7 +5,7 @@
     </div>
   </template>
   
-  <script setup>
+  <script lang="ts" setup>
     import Paragraph from '@/components/atoms/typography/Paragraph.vue'
   </script>
   

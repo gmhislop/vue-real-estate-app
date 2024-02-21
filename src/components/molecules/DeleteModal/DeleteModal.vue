@@ -13,25 +13,25 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { useHousesStore } from '@/stores/houses';
-import Paragraph from '@/components/atoms/typography/Heading.vue';
-import Heading from '@/components/atoms/typography/Paragraph.vue';
 import { useRouter, useRoute } from 'vue-router';
+import Paragraph from '@/components/atoms/typography/Paragraph.vue';
+import Heading from '@/components/atoms/typography/Heading.vue';
 import { DETAIL_PAGE, HOME_PAGE } from '@/router';
 
 const storeHouses = useHousesStore()
 const router = useRouter()
 const route = useRoute()
 
-const deleteHouse = async () => {
+const deleteHouse = async (): Promise<void> => {
   await storeHouses.deleteHouse()
   if (route.name === DETAIL_PAGE) {
     router.push({ name: HOME_PAGE })
   }
 }
 
-const cancelDelete = () => {
+const cancelDelete = (): void => {
   storeHouses.cancelDeleteHouse()
 }
 </script>
