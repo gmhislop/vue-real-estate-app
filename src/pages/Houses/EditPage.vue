@@ -1,54 +1,97 @@
 <template>
-    <div class="edit">
-        <div class="edit-container">
-            <router-link class="back-link" to="/"><img src="@/assets/ic_back_grey@3x.png" class="back-icon"
-                    alt="back" />Back to
-                overview</router-link>
-            <HousingForm />
-        </div>
-    </div>
-</template>
+    <Layout class="layout-wrapper-details">
+      <section class="create-house-details">
+  
+        <Heading layout-title="Edit listing"/>
+        
+        <HouseForm 
+          :handle-submit="handleSubmit" 
+          :values="formValues" buttonText="SAVE" v-if="storeHouses.houseDetails"/>
+      </section>
+    </Layout> 
+  </template>
+  
+  <script setup>
+    import { useHousesStore } from '@/stores/houses'
+    import Layout from '@/components/templates/Layout/Layout.vue';
+    import Heading from '@/components/atoms/typography/Heading.vue';
 
-<script>
-import HousingForm from '@/components/HousingForm.vue';
-
-export default {
-    name: 'Edit',
-    components: {
-        HousingForm
+    import { useRouter } from 'vue-router';
+    import HouseForm from '@/components/HouseForm/HouseForm.vue'
+    import { reactive, computed } from 'vue';
+    import { DETAIL_PAGE } from '@/router';
+  
+    const storeHouses = useHousesStore();
+  
+    if (!storeHouses.houseDetails) {
+      await storeHouses.fill()
     }
-};
-</script>
-
-<style scoped>
-.edit {
-    background-image: url('@/assets/img_background@3x.png');
-    background-size: cover;
-    width: 100%;
-    height: 100%;
-}
-
-.edit-container {
-    max-width: 800px;
-    padding: 1rem 10vw;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-}
-
-.back-icon {
-    margin-right: 0.5rem;
-    height: 1rem;
-}
-
-.back-link {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    font-weight: 700;
-    color: var(--color-text);
-    cursor: pointer;
-    width: fit-content;
-    margin: 2rem 0rem;
-}
-</style>
+  
+    const house = computed(() => storeHouses.houseDetails)
+  
+    let formValues = reactive({
+      streetName: house.value?.location.street.split(' ')[0], 
+          houseNumber: house.value?.location.street.split(' ')[1],
+        image: house.value?.image,
+        price: house.value?.price,
+        rooms: {
+          bedrooms: house.value?.rooms.bedrooms,
+          bathrooms: house.value?.rooms.bathrooms,
+        },
+        size: house.value?.size,
+        description: house.value?.description,
+        location: {
+  
+          street: house.value?.location.street,
+          city: house.value?.location.city,
+          zip: house.value?.location.zip,
+        },
+        createdAt: house.value.createdAt,
+        constructionYear: house.value?.constructionYear,
+        hasGarage: house.value?.hasGarage,
+    }
+    ) 
+    const router = useRouter();
+  
+    async function handleSubmit(formData) {
+      console.log('id: ', house.value.id)
+      const savedHouse = await storeHouses.updateHouse(formData, house.value.id)
+      router.push({name: DETAIL_PAGE, params: {id: savedHouse.id}})
+    }
+  
+  </script>
+  
+  <style scoped>
+    .layout-wrapper-details {
+      padding-bottom: 4rem;
+      background-image: url("@/assets/img_background@3x.png");
+      background-repeat: no-repeat;
+      background-size: 130%;
+      background-position: right;
+    }
+  
+    .create-house-details {
+      max-width: 28.125rem;
+      margin: auto;
+    }
+  
+    @media screen and (min-width: 48rem){
+      .create-house-details {
+        max-width: 31.25rem;
+      }
+    }
+  
+    @media screen and (min-width: 64rem) {
+      .create-house-details {
+        max-width: 23.625rem;
+        margin: 0;
+      }
+  
+      .layout-wrapper-details {
+        background-size: cover;
+        background-position: right top;
+      }
+    }
+  
+  </style>
+  
