@@ -3,7 +3,7 @@
   <header class="header-desktop">
     <nav class="desktop-nav" aria-label="Main navigation">
       <RouterLink :to="{ name: HOME_PAGE }">
-        <img alt="Logo" class="logo" src="@/assets/dtt-logo.png" width="45" height="45" />
+        <img alt="Logo" class="logo" src="@/assets/dtt-logo.png" height="45" />
       </RouterLink>
       <RouterLink :to="{ name: HOME_PAGE }">Houses</RouterLink>
       <RouterLink :to="{ name: ABOUT_PAGE }">About</RouterLink>
@@ -104,7 +104,6 @@ a .nav-icon--active {
 }
 
 .nav-icon {
-  width: 1.925rem;
   height: 1.925rem;
 }
 

@@ -6,6 +6,7 @@ import CreatePage from '@/pages/Houses/CreatePage.vue';
 import DetailPage from '@/pages/Houses/DetailPage.vue';
 import EditPage from '@/pages/Houses/EditPage.vue';
 import AboutPage from '@/pages/AboutPage.vue';
+import IndexPage from '@/pages/Houses/IndexPage.vue';
 
 export const HOME_PAGE = 'home';
 export const CREATE_PAGE = 'create';
@@ -22,7 +23,7 @@ const router = createRouter({
     },
     {
       path: '/properties',
-      component: OverviewPage,
+      component: IndexPage,
       children: [
         {
           path: '',
