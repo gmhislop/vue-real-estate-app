@@ -27,7 +27,7 @@
 
 .loading-spinner {
   border: 8px solid rgba(0, 0, 0, 0.1);
-  border-left-color: var(--primary);
+  border-left-color: var(--color-primary);
   border-radius: 50%;
   width: 50px;
   height: 50px;

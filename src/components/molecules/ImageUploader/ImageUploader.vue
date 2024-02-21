@@ -61,7 +61,7 @@ const displayPreviewImage = (event) => {
 }
 
 .input--error {
-    border: 1px solid var(--primary);
+    border: 1px solid red;
 }
 
 .image-upload-block {

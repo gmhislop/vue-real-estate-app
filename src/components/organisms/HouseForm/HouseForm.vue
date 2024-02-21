@@ -250,7 +250,7 @@
     }
 
   .input--error {
-    border: 1px solid var(--primary);
+    border: 1px solid var(--color-primary);
   }
 
   .form-submit-button {
@@ -260,7 +260,7 @@
     color: var(--background-2);
     border: none;
     border-radius: 4px;
-    background-color: var(--primary);
+    background-color: var(--color-primary);
     width: 100%;
     height: 2.25rem;
     margin: 1rem 0;
@@ -268,7 +268,7 @@
 
   .form-submit-button--inactive {
     color: var(--background-2);
-    background-color: var(--primary / 0.9);
+    background-color: var(--color-primary / 0.9);
   }
 
   @media screen and (min-width: 1024px) {

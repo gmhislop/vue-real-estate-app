@@ -85,7 +85,7 @@ const sortBy = ref<string>('');
 }
 
 .active-sort {
-    background-color: var(--primary);
+    background-color: var(--color-primary);
 }
 
 .relative-container {

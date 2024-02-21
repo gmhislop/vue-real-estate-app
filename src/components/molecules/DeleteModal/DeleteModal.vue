@@ -81,7 +81,7 @@ const cancelDelete = (): void => {
 }
 
 .btn--danger {
-  background-color: var(--primary);
+  background-color: red;
 }
 
 .btn--cancel {

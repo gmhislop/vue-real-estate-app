@@ -27,7 +27,7 @@ defineProps({ variant: String })
 
   .error-message {
     font-size: var(--input-errors);
-    color: var(--primary);
+    color: var(--color-primary);
     font-style: italic;
   }
 }
