@@ -1,40 +1,61 @@
-# vue-real-estate-app
+# Vue Real Estate Web App
 
-This template should help get you started developing with Vue 3 in Vite.
+This Vue Real Estate Web App provides users with a seamless experience to find, create, edit, and manage listings for houses.
 
-## Recommended IDE Setup
+## Features
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+### Navigation Header
+- Easily navigate through the app with a fixed navigation header.
+- Quickly access the Houses page.
+- Visual indication of the currently active page.
 
-## Type Support for `.vue` Imports in TS
+### Overview of Available Houses
+- Homepage displays an overview of all available houses.
+- Listings include address, postal code, and city information.
+- Thumbnails show images, size, number of bedrooms, and bathrooms for each listing.
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+### Search Functionality
+- Search through available houses based on various listing properties.
+- Clear search input with ease.
+- Get result indications for successful searches or empty results.
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+### Sorting Houses
+- Sort available houses on the homepage by price or size.
 
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+### Accessing House Details
+- Dive deeper into house details to learn more about listings.
+- View address, postal code, city, description, image, number of bedrooms and bathrooms, size, construction year, and garage availability.
+- Owners can delete or edit listings directly from the detail page.
 
-## Customize configuration
+### Creating a Listing
+- Easily create listings by filling out a comprehensive form.
+- Required fields include address details, image, description, price, size, number of bedrooms and bathrooms, construction year, and garage availability.
+- Receive clear error messages for incomplete or invalid form submissions.
+- Automatic redirection to the newly created listing detail page upon successful submission.
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+### Edit and Delete Buttons
+- Owners have access to edit and delete buttons on their listing detail page.
+- Seamlessly navigate to the edit page or delete the listing with ease.
 
-## Project Setup
+### Editing a Listing
+- Owners can make edits to their existing listings.
+- Modify address, image, description, price, size, number of bedrooms and bathrooms, construction year, and garage availability.
+- Receive instant feedback on incomplete or invalid edits.
 
-```sh
-npm install
-```
+### Deleting a Listing
+- Owners have the option to delete their listings.
+- Get a warning prompt before confirming the deletion of a listing.
 
-### Compile and Hot-Reload for Development
+## Technologies Used
+- Vue.js
+- Axios for HTTP requests
+- Pinia for state management
+- Vue Router for routing
+- TypeScript for type-checking
+- CSS for styling
 
-```sh
-npm run dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
-```
+## Getting Started
+1. Clone the repository.
+2. Install dependencies using `npm install`.
+3. Run the development server using `npm run serve`.
+4. Access the application in your web browser at the specified address (usually `http://localhost:8080`).
