@@ -2,10 +2,10 @@
     <Label>{{ label }}</Label>
     <label class="upload-image-container" :class="{ 'input--error': errors.length > 0 }" for="image">
         <span class="image-upload-block" v-if="!previewImageUrl">
-            <img class="upload-house-icon" src="@/assets/upload.png" alt="Upload house" />
+            <img class="upload-house-icon" src="@/assets/ic_upload@3x.png" alt="Upload house" />
         </span>
         <img class="uploaded-preview-image" :src="previewImageUrl" v-if="previewImageUrl" alt="Uploaded preview" />
-        <img class="cancel-uploaded-image-icon" src="@/assets/clear_white.png" v-if="previewImageUrl" @click="clearImage"
+        <img class="cancel-uploaded-image-icon" src="@/assets/ic_clear_white@3x.png" v-if="previewImageUrl" @click="clearImage"
             alt="Clear uploaded image" />
     </label>
     <Paragraph variant="error-message" v-for="error in errors" :key="error.$uid">
@@ -69,7 +69,6 @@ const displayPreviewImage = (event) => {
     background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%23E8E8E8FF' stroke-width='4' stroke-dasharray='10%2c 12' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
     width: 6.5rem;
     height: 6.5rem;
-    display: flex;
     justify-content: center;
     align-items: center;
 }

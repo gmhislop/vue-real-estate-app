@@ -17,7 +17,7 @@
     import Heading from '@/components/atoms/typography/Heading.vue';
 
     import { useRouter } from 'vue-router';
-    import HouseForm from '@/components/HouseForm/HouseForm.vue'
+    import HouseForm from '@/components/organisms/HouseForm/HouseForm.vue'
     import { reactive, computed } from 'vue';
     import { DETAIL_PAGE } from '@/router';
   

@@ -32,7 +32,7 @@
           <img 
             alt="Delete icon" 
             class="delete-icon delete-icon--desktop" 
-            src="@/assets/delete_grey.png" 
+            src="@/assets/ic_delete@3x.png" 
             v-if="house?.madeByMe" 
             @click="displayDeleteWarning"/>
           />
@@ -88,7 +88,7 @@
     import { useHousesStore } from '@/stores/houses';
     import DetailsContainer from '@/components/atoms/DetailsContainer/DetailsContainer.vue';
     import DetailContainer from '@/components/atoms/DetailsContainer/DetailContainer.vue';
-    import Icon from '@/components/atoms/Icons/HouseDetailsIcon.vue';
+    import Icon from '@/components/atoms/Icons/Icon.vue';
     import { EDIT_PAGE, HOME_PAGE } from '@/router';
     import { computed } from 'vue';
     import Paragraph from '@/components/atoms/typography/Paragraph.vue';
