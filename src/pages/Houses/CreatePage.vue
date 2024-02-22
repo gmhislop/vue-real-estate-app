@@ -1,10 +1,12 @@
 <template>
-    <layout class="layout-wrapper-details">
+  <div class="background-image">
+    <layout>
       <section class="create-house-details">
         <heading page-title="Create new listing"/>
         <house-form :handle-submit="handleSubmit" :values="newHouse" button-text="POST"/>
       </section>
     </layout>
+  </div>
   </template>
   
   <script setup>
@@ -45,12 +47,12 @@
   </script>
   
   <style scoped>
-  .layout-wrapper-details {
+  .background-image {
     padding-bottom: 4rem;
     background-image: url("@/assets/img_background@3x.png");
     background-repeat: no-repeat;
-    background-size: 130%;
-    background-position: right -6.25rem bottom;
+    background-size: 100%;
+    background-position: center;
   }
   
   .create-house-details {

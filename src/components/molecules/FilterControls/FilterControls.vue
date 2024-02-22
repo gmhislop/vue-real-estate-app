@@ -1,151 +1,125 @@
 <template>
     <header class="filters">
-        <div class="relative-container">
-            <input @input="updateSearch" :value="search" class="search-input" placeholder="Search for a house" />
-            <img class="searchbar-icon icon-search" src="@/assets/ic_search@3x.png" alt="search" />
-            <img @click="clearSearch" v-if="search" class="searchbar-icon icon-clear" src="@/assets/ic_clear@3x.png"
-                alt="clear" />
-        </div>
-        <div class="button-container" v-if="hasFilteredHouses">
-            <button class="button-sort button-sort-left" @click="updateSortBy('price')"
-                :class="{ 'active-sort': sortBy === 'price' }">Price</button>
-            <button class="button-sort button-sort-right" @click="updateSortBy('size')"
-                :class="{ 'active-sort': sortBy === 'size' }">Size</button>
-        </div>
+      <div class="relative-container">
+        <input @input="storeHouses.updateSearch($event.target.value)" :value="storeHouses.search" class="search-input" placeholder="Search for a house" />
+        <img class="searchbar-icon icon-search" src="@/assets/ic_search@3x.png" alt="Search icon" />
+        <img @click="storeHouses.clearSearch" v-if="storeHouses.search" class="searchbar-icon icon-clear" src="@/assets/ic_clear@3x.png" alt="Clear icon" />
+      </div>
+      <div class="button-container" v-if="storeHouses.filteredHouses.length > 0">
+        <button class="button-sort button-sort-left" @click="storeHouses.updateSortBy('price')" :class="{ 'active-sort': storeHouses.sortBy === 'price' }">Price</button>
+        <button class="button-sort button-sort-right" @click="storeHouses.updateSortBy('size')" :class="{ 'active-sort': storeHouses.sortBy === 'size' }">Size</button>
+      </div>
     </header>
-</template>
+  </template>
   
-<script setup lang="ts">
-import { ref } from 'vue';
-import { useHousesStore } from '@/stores/houses';
-
-interface House {
-  price: number;
-  size: number;
-}
-
-const search = ref<string>('');
-const storeHouses = useHousesStore();
-
-const updateSearch = (event: Event) => {
-    search.value = (event.target as HTMLInputElement).value;
-    storeHouses.updateSearch(search.value);
-};
-
-const clearSearch = () => {
-    search.value = '';
-    storeHouses.clearSearch();
-};
-
-const updateSortBy = (option: keyof House) => {
-    storeHouses.updateSortBy(option);
-};
-
-const hasFilteredHouses = storeHouses.filteredHouses.length > 0;
-
-const sortBy = ref<string>('');
-
-</script>
+  <script setup>
+  import { useHousesStore } from '@/stores/houses'
+  const storeHouses = useHousesStore();
+  </script>
   
-<style scoped>
-.filters {
+  <style scoped>
+  .filters {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     gap: 1rem;
     margin-bottom: 1rem;
-}
-
-.button-container {
+  }
+  
+  .button-container {
     width: 100%;
-    height: 2.25rem;
-}
-
-.button-sort {
+    height: 36px;
+  }
+  
+  .button-sort {
     width: 50%;
     height: 100%;
     padding: 0;
     font-family: var(--headers-buttons-bold);
     font-size: var(--buttons-tabs-text);
     font-weight: var(--bold);
-    color: var(--background-2);
-    background-color: var(--tertiary-dark);
+    color: var(--color-background-2);
+    background-color: var(--color-tertiary-dark);
     border: none;
-    border-radius: 0.5rem;
-}
+  }
+  
+  .button-sort-left {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+  }
+  
+  .button-sort-right {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+  }
 
-.button-sort-left {
-    border-top-left-radius: 0.05rem;
-    border-bottom-left-radius: 0.05rem;
-}
-
-.button-sort-right {
-    border-top-right-radius: 0.05rem;
-    border-bottom-right-radius: 0.05rem;
-}
-
-.active-sort {
+  .icon-clear, .button-sort-left, .button-sort-right {
+    cursor: pointer;
+  }
+  
+  .active-sort {
     background-color: var(--color-primary);
-}
-
-.relative-container {
+  }
+  
+  .relative-container {
     position: relative;
-}
-
-.search-input {
+  }
+  
+  .search-input {
     font-family: var(--font-body);
     font-size: var(--input-errors);
     font-weight: var(--regular);
     width: 100%;
-    height: 2.25rem;
-    background: var(--tertiary-light);
-    border-radius: 0.5rem;
+    height: 36px;
+    background: var(--color-tertiary-light);
+    border-radius: 8px;
     border: none;
-    color: var(--text-secondary);
-    padding: 0 1rem;
-}
-
-.searchbar-icon {
+    color: var(--color-text-secondary);
+    padding: 0 40px;
+  }
+  
+  .searchbar-icon {
     position: absolute;
     width: 1rem;
     height: 1rem;
-    top: 0.625rem;
-}
-
-.icon-search {
-    left: 1rem;
-}
-
-.icon-clear {
-    right: 1rem;
-}
-
-@media screen and (min-width: 1024px) {
+    top: 8px;
+  }
+  
+  .icon-search {
+    left: 12px;
+  }
+  
+  .icon-clear {
+    right: 12px;
+  }
+  
+  @media screen and (min-width: 1024px) {
     .relative-container {
-        width: 40%;
+      width: 40%;
     }
-
+  
     .filters {
-        flex-direction: row;
-        margin-bottom: 1.5rem;
+      flex-direction: row;
+      margin-bottom: 1.5rem;
     }
-
+  
     .searchbar-icon {
-        top: 0.875rem;
+      top: 0.9rem;
     }
-
+  
     .search-input {
-        font-size: var(--input-errors);
-        height: 2.75rem;
+      font-size: var(--input-errors);
+      height: 44px;
     }
-
+  
     .button-container {
-        width: 30%;
-        height: 2.75rem;
+      width: 30%;
+      height: 44px;
     }
-
+  
     .button-sort {
-        font-size: var(--buttons-tabs-text);
+      font-size: var(--buttons-tabs-text);
     }
-}
-</style>
+  }
+  </style>
+  

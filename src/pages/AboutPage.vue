@@ -1,6 +1,6 @@
 <template>
   <main>
-    <Layout>
+    <Layout class="layout">
       <div class="about-container">
         <Heading as="h2">
           About DTT Real Estate
@@ -42,6 +42,7 @@ import Layout from '@/components/templates/Layout/Layout.vue';
   flex-direction: column;
   gap: 1.5rem;
   margin: 1.5rem 0;
+  height: 100%;
 }
 
 .logo-image {
@@ -50,7 +51,6 @@ import Layout from '@/components/templates/Layout/Layout.vue';
 
 .info-container {
   display: flex;
-  align-items: center;
   gap: 1rem;
 }
 

@@ -1,5 +1,6 @@
 <template>
-    <Layout class="layout-wrapper-details">
+    <div class="background-image">
+    <Layout>
       <section class="create-house-details">
   
         <Heading layout-title="Edit listing"/>
@@ -9,6 +10,7 @@
           :values="formValues" buttonText="SAVE" v-if="storeHouses.houseDetails"/>
       </section>
     </Layout> 
+  </div>
   </template>
   
   <script setup>
@@ -62,13 +64,13 @@
   </script>
   
   <style scoped>
-    .layout-wrapper-details {
-      padding-bottom: 4rem;
-      background-image: url("@/assets/img_background@3x.png");
-      background-repeat: no-repeat;
-      background-size: 130%;
-      background-position: right;
-    }
+    .background-image {
+    padding-bottom: 4rem;
+    background-image: url("@/assets/img_background@3x.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center;
+  }
   
     .create-house-details {
       max-width: 28.125rem;

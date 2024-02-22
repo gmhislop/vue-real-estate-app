@@ -95,7 +95,7 @@ a .nav-icon--active {
   position: fixed;
   bottom: 0;
   width: 100%;
-  background-color: var(--background-2);
+  background-color: var(--color-background-1);
   min-height: 3.125rem;
   display: flex;
   justify-content: space-around;
@@ -114,7 +114,7 @@ a .nav-icon--active {
 
   .header-desktop {
     display: block;
-    background-color: var(--background-2);
+    background-color: var(--color-background-2);
   }
 }
 </style>

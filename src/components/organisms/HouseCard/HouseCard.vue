@@ -2,30 +2,30 @@
   <article class="house-card">
     <img alt="Picture of a house" class="house-image" :src="house.image ? house.image : ' ' " />
     <div class="house-info-container">
-      <Heading>{{ house.location.street }}</Heading>
+      <Heading>{{ house.location.street }} {{ house.location.houseNumber }}</Heading>
       <Paragraph>{{ formattedPrice }}</Paragraph>
       <Paragraph variant="paragraph-light"
         >{{ house.location.zip }} {{ house.location.city }}</Paragraph
       >
       <DetailsContainer class="house-DetailsContainer">
         <DetailContainer>
-          <Icon alt="Bedroom icon" url="/src/assets/ic_bed@3x.png" />
+          <Icon altText="Bedroom icon" iconUrl="/src/assets/ic_bed@3x.png" />
           <Paragraph>{{ house.rooms.bedrooms }}</Paragraph>
         </DetailContainer>
 
         <DetailContainer>
-          <Icon alt="Bathroom icon" url="/src/assets/ic_bath@3x.png" />
+          <Icon altText="Bathroom icon" iconUrl="/src/assets/ic_bath@3x.png" />
           <Paragraph>{{ house.rooms.bathrooms }}</Paragraph>
         </DetailContainer>
 
         <DetailContainer>
-          <Icon alt="Size icon" url="/src/assets/ic_size@3x.png" />
+          <Icon altText="Size icon" iconUrl="/src/assets/ic_size@3x.png" />
           <Paragraph>{{ house.size }} m<sup>2</sup></Paragraph>
         </DetailContainer>
       </DetailsContainer>
     </div>
     <router-link :to="{ name: EDIT_PAGE, params: { id: house.id } }" v-if="house.madeByMe">
-      <img alt="Edit icon" class="edit-icon" src="@/assets/ic_edit@3x.png" />
+      <img alt="Edit icon" class="edit-icon" src="/src/assets/ic_edit@3x.png" />
     </router-link>
     <img
       alt="Delete icon"
@@ -60,7 +60,6 @@ function displayDeleteWarning(event: Event) {
 }
 
 const formattedPrice = formatCurrency(props.house.price);
-
 </script>
 
 <style scoped>
@@ -69,7 +68,7 @@ const formattedPrice = formatCurrency(props.house.price);
   display: flex;
   justify-content: flex-start;
   gap: 1rem;
-  background-color: var(--background-2);
+  background-color: var(--color-background-2);
   border-radius: 1rem;
   padding: 0.75rem;
   box-shadow: 0 0 0.1875rem 0.1875rem rgba(195, 195, 195, 0.1);

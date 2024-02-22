@@ -4,7 +4,8 @@ export type House = {
     size: number;
     location: {
       street: string;
-  
+      houseNumber: string;
+      houseNumberAddition: string;
       city: string;
       zip: string;
     };

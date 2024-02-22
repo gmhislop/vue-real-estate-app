@@ -12,6 +12,5 @@
   flex-direction: row;
   justify-content: flex-start;
   gap: 1rem;
-  padding-bottom: 1rem;
 }
 </style>

@@ -14,6 +14,7 @@
 @media screen and (min-width: 1024px) {
     .layout {
         padding: 1.5rem 10.3125rem 0 10.3125rem;
+        height: 100%;
     }
 }
 </style>

@@ -254,12 +254,12 @@
   }
 
   .form-submit-button {
-    font-family: var(--headers-buttons-bold);
+    font-family: var(--font-headings);
     font-size: var(--buttons-tabs-text);
     font-weight: var(--bold);
-    color: var(--background-2);
+    color: var(--color-background-2);
     border: none;
-    border-radius: 4px;
+    border-radius: 8px;
     background-color: var(--color-primary);
     width: 100%;
     height: 2.25rem;

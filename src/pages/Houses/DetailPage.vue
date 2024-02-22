@@ -35,45 +35,43 @@
             src="@/assets/ic_delete@3x.png" 
             v-if="house?.madeByMe" 
             @click="displayDeleteWarning"/>
-          />
-  
           <DetailsContainer>
             <DetailContainer>
-              <Icon alt="Location icon" url="/src/assets/ic_location@3x.png"/>
+              <Icon alt="Location icon" src="/src/assets/ic_location@3x.png"/>
               <Paragraph>{{ house?.location.zip }} {{ house?.location.city }}</Paragraph>
             </DetailContainer>
           </DetailsContainer>
   
           <DetailsContainer>
             <DetailContainer>
-              <Icon alt="Price icon" url="/src/assets/ic_price@3x.png"/>
+              <Icon alt="Price icon" src="/src/assets/ic_price@3x.png"/>
               <Paragraph>{{ price }}</Paragraph>
             </DetailContainer>
   
             <DetailContainer>
-              <Icon alt="Size icon" url="/src/assets/ic_size@3x.png"/>
+              <Icon altText="Size icon" iconUrl="/src/assets/ic_size@3x.png"/>
               <Paragraph>{{ house?.size}} m2</Paragraph>
             </DetailContainer>
   
             <DetailContainer>
-              <Icon alt="Construction icon" url="/src/assets/ic_construction_date@3x.png"/>
+              <Icon altText="Construction icon" iconUrl="/src/assets/ic_construction_date@3x.png"/>
               <Paragraph>Built in {{ house?.constructionYear}}</Paragraph>
             </DetailContainer>
           </DetailsContainer>
   
           <DetailsContainer>
             <DetailContainer>
-              <Icon alt="Bedroom icon" url="/src/assets/bed.png"/>
+              <Icon altText="Bedroom icon" iconUrl="/src/assets/ic_bed@3x.png"/>
               <Paragraph>{{ house?.rooms.bedrooms}}</Paragraph>
             </DetailContainer>
   
             <DetailContainer>
-              <Icon alt="Bathroom icon" url="/src/assets/bathtub.png"/>
+              <Icon altText="Bathroom icon" iconUrl="/src/assets/ic_bath@3x.png"/>
               <Paragraph>{{ house?.rooms.bathrooms}}</Paragraph>
             </DetailContainer>
   
             <DetailContainer>
-              <Icon alt="Garage icon" url="/src/assets/garage.png"/>
+              <Icon altText="Garage icon" iconUrl="/src/assets/ic_garage@3x.png"/>
               <Paragraph>{{ hasGarage }}</Paragraph>
             </DetailContainer>
           </DetailsContainer>
@@ -182,7 +180,7 @@
       margin-top: -24px;
       border-top-left-radius: 10px;
       border-top-right-radius: 10px;
-      background-color: var(--background-2);
+      background-color: var(--color-background-2);
     }
   
     .subtitle {

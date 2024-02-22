@@ -69,7 +69,7 @@ const cancelDelete = (): void => {
 }
 
 .btn {
-  font-family: var(--headers-buttons-bold);
+  font-family: var(--font-headings);
   font-size: var(--buttons-tabs-text);
   font-weight: var(--bold);
   color: var(--background-2);

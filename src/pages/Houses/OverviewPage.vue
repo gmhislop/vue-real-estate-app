@@ -41,7 +41,7 @@
 import { useHousesStore } from '@/stores/houses';
 import  NotFound  from '@/components/molecules/Notfound/NotFound.vue';
 import  FilterControls  from '@/components/molecules/FilterControls/FilterControls.vue';
-import  HouseCard  from '@/components/molecules/HouseCard/HouseCard.vue';
+import  HouseCard  from '@/components/organisms/HouseCard/HouseCard.vue';
 import  Layout from '@/components/templates/Layout/Layout.vue';
 import  Heading  from '@/components/atoms/typography/Heading.vue';
 import { DETAIL_PAGE, CREATE_PAGE } from '@/router';
@@ -106,7 +106,7 @@ if (storeHouses.houses.length === 0) {
     gap: 2rem;
     width: 14rem;
     height: 100%;
-    font-family: var(--headers-buttons-bold);
+    font-family: var(--font-headings);
     font-size: var(--buttons-tabs-text);
     font-weight: var(--bold);
     color: var(--color-text-tertiary);
@@ -114,6 +114,7 @@ if (storeHouses.houses.length === 0) {
     border: none;
     border-radius: 0.625rem;
     padding: 0;
+    cursor: pointer;
   }
   .house-list {
     gap: 1.5rem;
