@@ -44,14 +44,14 @@ const props = defineProps<Props>()
 
 const { label, modelValue, errors, updateModel } = props
 
-const hasErrors = errors.length > 0
+const hasErrors = errors?.length > 0
 
 const updateModelValue = (event: Event) => {
   const inputValue = (event.target as HTMLInputElement).value;
   updateModel(inputValue);
 }
 
-const errorIds = errors.map((error) => error.$uid).join(' ')
+const errorIds = errors?.map((error) => error.$uid).join(' ')
 </script>
 
 <style scoped>
@@ -69,7 +69,7 @@ const errorIds = errors.map((error) => error.$uid).join(' ')
 }
 
 .input--error {
-  border: 1px solid #eb5440;
+  border: 1px solid red;
 }
 
 .input-container {

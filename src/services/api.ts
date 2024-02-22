@@ -7,18 +7,30 @@ export const instance = axios.create({
 });
 
 export const getHouses = async (): Promise<House[]> => {
-  const response: AxiosResponse<House[]> = await instance.get('/houses');
+  const response: AxiosResponse<House[]> = await instance.get('/houses', {
+    headers: {
+      'X-Api-Key': import.meta.env.VITE_API_KEY
+    }
+  });
   console.log(JSON.stringify(response.data));
   return response.data;
 };
 
 export const postHouse = async (house: House): Promise<House> => {
-  const response: AxiosResponse<House> = await instance.post('/houses', house);
+  const response: AxiosResponse<House> = await instance.post('/houses', house, {
+    headers: {
+      'X-Api-Key': import.meta.env.VITE_API_KEY
+    }
+  });
   return response.data;
 };
 
 export const updateHouse = async (house: House, id: string): Promise<House> => {
-  const response: AxiosResponse<House> = await instance.patch(`/houses/${id}`, house);
+  const response: AxiosResponse<House> = await instance.patch(`/houses/${id}`, house, {
+    headers: {
+      'X-Api-Key': import.meta.env.VITE_API_KEY
+    }
+  });
   return response.data;
 };
 
@@ -33,7 +45,7 @@ export const uploadImage = async (image: File, houseId: string): Promise<void> =
   await instance.post(`/houses/${houseId}/upload`, data, {
     headers: {
       'Content-Type': image.type,
-      'X-Api-Key': import.meta.env.VITE_API_KEY as string
+      'X-Api-Key': import.meta.env.VITE_API_KEY
     }
   });
 };
