@@ -2,7 +2,7 @@
   <main>
     <Layout>
       <div class="heading-container--mobile">
-        <RouterLink class="add-link" :to="{ name: CREATE_PAGE }">
+        <RouterLink class="add-link" :to="{ name: CREATE_PAGE, params: { id: house?.id } }">
           <img alt="Plus icon" class="plus-icon" src="@/assets/ic_plus_grey@3x.png" />
         </RouterLink>
         <Heading class="page-title--mobile">Houses</Heading>
@@ -10,7 +10,7 @@
 
       <div class="heading-container--desktop">
         <Heading class="page-title--mobile">Houses</Heading>
-        <RouterLink class="create-button-container" :to="{ name: CREATE_PAGE }">
+        <RouterLink class="create-button-container" :to="{ name: CREATE_PAGE, params: { id: house?.id } }">
           <button class="create-new-button">
             <img alt="White plus icon" class="plus-icon" src="@/assets/ic_plus_white@3x.png" />
             CREATE NEW

@@ -1,5 +1,5 @@
 <template>
-  <div class="overlay">
+  <div class="overlay" @click="cancelDelete">
     <div class="modal">
       <Heading class="title">Delete Listing</Heading>
       <Paragraph class="text">
@@ -66,26 +66,30 @@ const cancelDelete = (): void => {
 
 .text {
   margin-bottom: 1rem;
+  text-align: center;
 }
 
 .btn {
   font-family: var(--font-headings);
   font-size: var(--buttons-tabs-text);
   font-weight: var(--bold);
-  color: var(--background-2);
+  color: var(--color-background-2);
   border: none;
-  border-radius: 0.3125rem;
+  border-radius: 8px;
   width: 70%;
   padding: 0.75rem;
   text-align: center;
+  cursor: pointer;
 }
 
 .btn--danger {
-  background-color: red;
+  background-color: var(--color-primary);
+  color: var(--color-background-2)
 }
 
 .btn--cancel {
-  background-color: var(--secondary);
+  background-color: var(--color-secondary);
+  color: var(--color-background-2)
 }
 
 @media screen and (min-width: 1024px) {

@@ -1,7 +1,11 @@
 <template>
     <div class="background-image">
-    <Layout>
-      <section class="create-house-details">
+      <Layout>
+        <section class="create-house-details">
+        <RouterLink class="back-arrow-container" :to="{ name: DETAIL_PAGE }">
+          <img alt="Back Arrow icon" class="back-arrow-icon" src="@/assets/ic_back_grey@3x.png" />
+          <p class="back-button-label">Back to detail page</p>
+        </RouterLink>
   
         <Heading>Edit listing</Heading>
         
@@ -94,6 +98,17 @@
         background-position: right top;
       }
     }
-  
+
+  .back-arrow-icon {
+    height: 16px;
+  }
+  .back-arrow-container {
+    display: flex;
+    gap: 16px;
+    margin: 24px 0;
+    color: var(--color-text-primary);
+    font-weight: var(--semibold);
+    align-items: center;
+  }
   </style>
   

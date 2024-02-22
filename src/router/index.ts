@@ -1,6 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 
-// Import your page components
 import OverviewPage from '@/pages/Houses/OverviewPage.vue';
 import CreatePage from '@/pages/Houses/CreatePage.vue';
 import DetailPage from '@/pages/Houses/DetailPage.vue';

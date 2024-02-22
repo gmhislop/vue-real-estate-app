@@ -51,18 +51,17 @@ import Layout from '@/components/templates/Layout/Layout.vue';
 
 .info-container {
   display: flex;
-  gap: 1rem;
+  gap: 2rem;
 }
 
 .link-container {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
 }
 
 .about-link {
   text-decoration: none;
-  color: var(--text-hyperlink);
+  color: var(--color-hyperlink);
   font-size: var(--listing-information);
 }
 </style>

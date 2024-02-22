@@ -1,6 +1,10 @@
 <template>
   <div class="background-image">
     <layout>
+      <RouterLink class="back-arrow-container" :to="{ name: DETAIL_PAGE}">
+          <img alt="Back Arrow icon" class="back-arrow-icon" src="@/assets/ic_back_grey@3x.png" />
+          <p class="back-button-label">Back to detail page</p>
+        </RouterLink>
       <section class="create-house-details">
         <Heading>Create new listing</Heading>
         <house-form :handle-submit="handleSubmit" :values="newHouse" button-text="POST"/>
@@ -51,8 +55,8 @@
     padding-bottom: 4rem;
     background-image: url("@/assets/img_background@3x.png");
     background-repeat: no-repeat;
-    background-size: 100%;
-    background-position: center;
+    background-size: 132%;
+    background-position: right -100px bottom;
   }
   
   .create-house-details {
@@ -72,10 +76,22 @@
       margin: 0;
     }
   
-    .layout-wrapper-details {
+    .background-image {
       background-size: cover;
       background-position: right top;
     }
+  }
+
+  .back-arrow-icon {
+      height: 16px;
+    }
+  .back-arrow-container {
+    display: flex;
+    gap: 16px;
+    margin: 24px 0;
+    color: var(--color-text-primary);
+    font-weight: var(--semibold);
+    align-items: center;
   }
   </style>
   

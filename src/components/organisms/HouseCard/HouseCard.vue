@@ -2,12 +2,12 @@
   <article class="house-card">
     <img alt="Picture of a house" class="house-image" :src="house.image ? house.image : ' ' " />
     <div class="house-info-container">
-      <Heading>{{ house.location.street }} {{ house.location.houseNumber }}</Heading>
-      <Paragraph>{{ formattedPrice }}</Paragraph>
+      <Heading as="h3" class="title">{{ house.location.street }} {{ house.location.houseNumber }}</Heading>
+      <Paragraph class="house-pice">{{ formattedPrice }}</Paragraph>
       <Paragraph variant="paragraph-light"
         >{{ house.location.zip }} {{ house.location.city }}</Paragraph
       >
-      <DetailsContainer class="house-DetailsContainer">
+      <DetailsContainer class="house-details-container">
         <DetailContainer>
           <Icon altText="Bedroom icon" iconUrl="/src/assets/ic_bed@3x.png" />
           <Paragraph>{{ house.rooms.bedrooms }}</Paragraph>
@@ -63,6 +63,17 @@ const formattedPrice = formatCurrency(props.house.price);
 </script>
 
 <style scoped>
+
+.title {
+  font-weight: var(--regular);
+  color: var(--color-text-primary);
+}
+
+.house-pice {
+  font-weight: var(--medium);
+  color: var(--color-text-primary);
+}
+
 .house-card {
   position: relative;
   display: flex;
@@ -87,8 +98,7 @@ const formattedPrice = formatCurrency(props.house.price);
   gap: 1rem;
 }
 
-.house-DetailsContainer {
-  margin-top: 1rem;
+.house-details-container {
   gap: 0.75rem;
 }
 

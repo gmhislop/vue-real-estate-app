@@ -20,7 +20,7 @@
     }
   
     .search-not-found-image {
-      width: 100px;
+      width: 25vw;
     }
   
     .body-message {
