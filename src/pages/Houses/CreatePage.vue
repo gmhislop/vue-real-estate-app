@@ -2,7 +2,7 @@
   <div class="background-image">
     <layout>
       <section class="create-house-details">
-        <heading page-title="Create new listing"/>
+        <Heading>Create new listing</Heading>
         <house-form :handle-submit="handleSubmit" :values="newHouse" button-text="POST"/>
       </section>
     </layout>

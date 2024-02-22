@@ -1,7 +1,7 @@
 <template>
-  <h1 class="title">
+  <h2 class="title">
     <slot></slot>
-  </h1>
+  </h2>
 </template>
 
 <script setup></script>
@@ -9,7 +9,7 @@
 <style scoped>
 .title {
   font-size: var(--input-errors);
-  font-weight: var(--semibold);
+  font-weight: var(--regular);
   padding: 0.5rem 0;
 }
 

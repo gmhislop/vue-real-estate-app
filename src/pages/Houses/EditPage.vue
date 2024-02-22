@@ -3,7 +3,7 @@
     <Layout>
       <section class="create-house-details">
   
-        <Heading layout-title="Edit listing"/>
+        <Heading>Edit listing</Heading>
         
         <HouseForm 
           :handle-submit="handleSubmit" 
