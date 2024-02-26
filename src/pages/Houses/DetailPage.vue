@@ -183,10 +183,12 @@
 
 .edit-icon {
   height: 1.25rem;
+  cursor: pointer;
 }
 
 .delete-icon {
   height: 1.25rem;
+  cursor: pointer;
 }
 
 .house-info {
