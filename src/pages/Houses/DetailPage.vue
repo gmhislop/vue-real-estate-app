@@ -130,8 +130,8 @@
 <style scoped>
 
 .layout-wrapper-details {
-  padding: 0 0 64px 0;
-  margin-bottom: 100px;
+  padding: 0 0 4rem 0;
+  margin-bottom: 6.25rem;
 }
 
 .control-container-mobile {
@@ -139,19 +139,19 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 24px;
+  padding: 1.5rem;
 }
 
 .back-arrow-icon-mobile {
-  height: 24px;
+  height: 1.5rem;
 }
 
 .delete-icon-mobile {
-  height: 24px;
+  height: 1.5rem;
 }
 
 .edit-icon-mobile {
-  height: 24px;
+  height: 1.5rem;
 }
 
 .mobile-edit-delete {
@@ -170,41 +170,41 @@
 
 .background-img {
   position: relative;
-  min-height: 300px;
-  margin-bottom: -24px;
+  min-height: 18.75rem;
+  margin-bottom: -1.5rem;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
 }
 
 .back-arrow-icon {
-  height: 16px;
+  height: 1rem;
 }
 
 .edit-icon {
-  height: 20px;
+  height: 1.25rem;
 }
 
 .delete-icon {
-  height: 20px;
+  height: 1.25rem;
 }
 
 .house-info {
   position: relative;
-  padding: 24px;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  padding: 1.5rem;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
   background-color: var(--color-background-2);
 }
 
 .subtitle {
-  padding-bottom: 8px;
+  padding-bottom: 0.5rem;
   font-size: var(--header-2);
   font-weight: var(--semibold);
 }
 
 .house-description {
-  padding-top: 24px;
+  padding-top: 1.5rem;
   font-weight: var(--light);
 }
 
@@ -213,60 +213,59 @@
   font-size: var(--listing-information);
 }
 
-@media screen and (min-width: 768px){
+@media screen and (min-width: 48rem) {
   .background-img {
-    min-height: 500px;
+    min-height: 31.25rem;
   }
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 64rem) {
   .layout-wrapper-details {
-    padding: 24px 165px 0 165px;
+    padding: 1.5rem 10.3125rem 0 10.3125rem;
   }
 
   .back-arrow-container {
     display: flex;
-    gap: 16px;
-    margin: 24px 0;
+    gap: 1rem;
+    margin: 1.5rem 0;
     color: var(--color-text-primary);
   }
 
   .house-details {
-    max-width: 650px;
+    max-width: 40.625rem;
     margin: 0;
   }
 
   .back-button-label {
-    /* font-family: var(--font-headings); */
-    /* font-size: var(--back-button-label); */
     font-weight: var(--semibold);
     display: block;
   }
 
   .background-img {
-    min-height: 500px;
+    min-height: 31.25rem;
   }
 
   .edit-icon {
     position: absolute;
-    width: 20px;
-    top: 40px;
-    right: 72px;
+    width: 1.25rem;
+    top: 2.5rem;
+    right: 4.5rem;
   }
 
   .delete-icon {
     position: absolute;
-    width: 20px;
-    top: 40px;
-    right: 32px;
+    width: 1.25rem;
+    top: 2.5rem;
+    right: 2rem; 
   }
 
   .house-info {
-    padding: 32px;
-    margin-top: 0px;
-    border-top-left-radius: 0px;
-    border-top-right-radius: 0px;
+    padding: 2rem;
+    margin-top: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
   }
 }
 
 </style>
+

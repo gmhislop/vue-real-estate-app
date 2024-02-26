@@ -142,7 +142,7 @@
 
   const props = defineProps({
     values: {
-      price: Number,
+      price: String,
       houseNumber: String,
       image: String,
       bedrooms: Number,
@@ -241,7 +241,7 @@
   }
 
   .select-container {
-    width: 177px;
+    width: 11.063rem;
     flex-grow: 1;
   }
 

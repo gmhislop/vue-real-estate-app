@@ -78,7 +78,7 @@ const displayPreviewImage = (event) => {
     height: 6.5rem;
     object-fit: cover;
     object-position: left;
-    border-radius: 5px;
+    border-radius: 4px;
 }
 
 .cancel-uploaded-image-icon {

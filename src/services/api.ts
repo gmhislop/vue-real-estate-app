@@ -12,7 +12,6 @@ export const getHouses = async (): Promise<House[]> => {
       'X-Api-Key': import.meta.env.VITE_API_KEY
     }
   });
-  console.log(JSON.stringify(response.data));
   return response.data;
 };
 

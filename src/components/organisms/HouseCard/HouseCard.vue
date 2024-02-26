@@ -24,6 +24,7 @@
         </DetailContainer>
       </DetailsContainer>
     </div>
+    <div class="icons-container">
     <router-link :to="{ name: EDIT_PAGE, params: { id: house.id } }" v-if="house.madeByMe">
       <img alt="Edit icon" class="edit-icon" src="/src/assets/ic_edit@3x.png" />
     </router-link>
@@ -34,6 +35,7 @@
       v-if="house.madeByMe"
       @click="displayDeleteWarning"
     />
+    </div>
   </article>
 </template>
 
@@ -104,17 +106,22 @@ const formattedPrice = formatCurrency(props.house.price);
 
 .edit-icon,
 .delete-icon {
+  height: 1.5rem;
+  cursor: pointer;
+  align-items: center;
+  display: flex;
+}
+
+.icons-container {
+  display: flex;
   position: absolute;
-  width: 1.5rem;
-  top: 1.25rem;
+  align-items: center;
+  right: 1rem;
+  gap: 1rem;
 }
 
-.edit-icon {
-  right: 5rem;
-}
-
-.delete-icon {
-  right: 2.5rem;
+.edit-icon:hover, .delete-icon:hover {
+  filter: brightness(0.8);
 }
 
 @media screen and (min-width: 64rem) {
@@ -132,18 +139,6 @@ const formattedPrice = formatCurrency(props.house.price);
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-  }
-
-  .edit-icon {
-    width: 1.875rem;
-    top: 3.25rem;
-    right: 6.25rem;
-  }
-
-  .delete-icon {
-    width: 1.875rem;
-    top: 3.25rem;
-    right: 3.125rem;
   }
 }
 </style>

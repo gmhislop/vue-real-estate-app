@@ -109,12 +109,12 @@
   
     .search-input {
       font-size: var(--input-errors);
-      height: 44px;
+      height: 2.75rem;
     }
   
     .button-container {
       width: 30%;
-      height: 44px;
+      height: 2.75rem;
     }
   
     .button-sort {

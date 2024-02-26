@@ -94,12 +94,12 @@
     }
 
   .back-arrow-icon {
-    height: 16px;
+    height: 1rem;
   }
   .back-arrow-container {
     display: flex;
-    gap: 16px;
-    margin: 24px 0;
+    gap: 1rem;
+    margin: 1.5rem 0;
     color: var(--color-text-primary);
     font-weight: var(--semibold);
     align-items: center;

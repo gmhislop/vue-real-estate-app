@@ -52,7 +52,7 @@
     background-image: url("@/assets/img_background@3x.png");
     background-repeat: no-repeat;
     background-size: 132%;
-    background-position: right -100px bottom;
+    background-position: right -6.25rem bottom;
   }
   
   .create-house-details {
@@ -79,12 +79,12 @@
   }
 
   .back-arrow-icon {
-      height: 16px;
+      height: 1rem;
     }
   .back-arrow-container {
     display: flex;
-    gap: 16px;
-    margin: 24px 0;
+    gap: 1rem;
+    margin: 1.5rem 0;
     color: var(--color-text-primary);
     font-weight: var(--semibold);
     align-items: center;
