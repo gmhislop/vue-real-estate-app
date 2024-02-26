@@ -5,7 +5,10 @@
       placeholder="Enter the street name" 
       type="text" 
       v-model="house.streetName"
-      :errors="formValidation.streetName.$errors"
+      @updateModel="(val: string) => {
+        house.streetName = val
+      }"
+      :errors="formValidation?.streetName.$errors"
     />
 
     <DetailsContainer class="inputs-container">
@@ -14,12 +17,14 @@
         placeholder="Enter house number" 
         type="number" 
         v-model="house.houseNumber"
+        @updateModel="(val: string) => house.houseNumber = val"
         :errors="formValidation.houseNumber.$errors"
       />
       <Input 
         label="Addition (optional)" 
         placeholder="e.g. A" 
         type="text" 
+        @updateModel="(val: string) => house.numberAddition = val"
         v-model="house.numberAddition"
       />
     </DetailsContainer>
@@ -28,21 +33,27 @@
       label="Postal code*" 
       placeholder="e.g. 1000 AA" 
       type="text" 
-      v-model="house.location.zip"
-      :errors="formValidation.location.zip.$errors"
+      v-model="house.zip"
+      @updateModel="(val: string) => house.zip = val"
+      :errors="formValidation.zip.$errors"
     />
     <Input 
       label="City*" 
       placeholder="e.g. Utrecht" 
       type="text" 
-      v-model="house.location.city"
-      :errors="formValidation.location.city.$errors"
+      v-model="house.city"
+      @updateModel="(val: string) => house.city = val"
+      :errors="formValidation.city.$errors"
     />
 
     <ImageUploader 
       label="Upload picture (PNG or JPG)*"
-      v-model:previewImageUrl="house.image"
-      v-model:imageFile="house.file"
+      :previewImageUrl="house.image"
+      :imageFile="house.file"
+      @updateModel="(url: string, file: File | null) => {
+        house.image = url;
+        house.file = file;
+      }"
       :errors="formValidation.image.$errors"
     />
 
@@ -51,6 +62,7 @@
       placeholder="e.g. €150.000" 
       type="number" 
       v-model="house.price"
+      @updateModel="(val: string) => house.price = val"
       :errors="formValidation.price.$errors"
     />
 
@@ -60,11 +72,12 @@
         placeholder="e.g. 60m2" 
         type="number" 
         v-model="house.size"
+        @updateModel="(val: string) => house.size = val"
         :errors="formValidation.size.$errors"
       />
       <div class="select-container">
         <Label>Garage*</Label>
-        <select class="drop-down" :class="{'input--error': formValidation.hasGarage.$errors.length > 0}" v-model="house.hasGarage">
+        <select class="drop-down" :class="{'input--error': formValidation.hasGarage.$errors.length > 0}" v-model="house.hasGarage" @change="(event: Event) => house.hasGarage = (event.target as HTMLInputElement).value">
           <option disabled value="">Select</option>
           <option value="true">Yes</option>
           <option value="false">No</option>
@@ -80,15 +93,17 @@
         label="Bedrooms*" 
         placeholder="Enter amount" 
         type="number" 
-        v-model="house.rooms.bedrooms"
-        :errors="formValidation.rooms.bedrooms.$errors"
+        v-model="house.bedrooms"
+        @updateModel="(val: string) => house.bedrooms = val"
+        :errors="formValidation.bedrooms.$errors"
       />
       <Input 
         label="Bathrooms*" 
         placeholder="Enter amount" 
         type="number" 
-        v-model="house.rooms.bathrooms"
-        :errors="formValidation.rooms.bathrooms.$errors"
+        v-model="house.bathrooms"
+        @updateModel="(val: string) => house.bathrooms = val"
+        :errors="formValidation.bathrooms.$errors"
       />
     </DetailsContainer>
 
@@ -97,11 +112,12 @@
       placeholder="e.g. 1990" 
       type="number" 
       v-model="house.constructionYear"
+      @updateModel="(val: string) => house.constructionYear = val"
       :errors="formValidation.constructionYear.$errors"
     />
     <div class="description-container">
       <Label>Description*</Label>
-      <textarea class="description-text-area" :class="{'input--error': formValidation.description.$errors.length > 0}" placeholder="Enter description" v-model="house.description"></textarea>
+      <textarea class="description-text-area" :class="{'input--error': formValidation.description.$errors.length > 0}" :value="house.description" placeholder="Enter description" @change="(event: Event) => house.description = (event.target as HTMLInputElement).value"></textarea>
       <Paragraph variant="error-message" v-for="error in formValidation.description.$errors" :key="error.$uid">
         {{ error.$message }}
       </Paragraph>
@@ -119,26 +135,25 @@
   import useVuelidate from '@vuelidate/core'
   import { required, helpers } from '@vuelidate/validators'
   import ImageUploader from '@/components/molecules/ImageUploader/ImageUploader.vue';
+  import { DETAIL_PAGE } from '@/router';
+  import { useRouter } from 'vue-router';
+  import { uploadImage } from '@/services/api';
+  const router = useRouter();
 
   const props = defineProps({
     values: {
-      image: String,
       price: Number,
-      rooms: {
-        bedrooms: Number,
-        bathrooms: Number
-      },
+      houseNumber: String,
+      image: String,
+      bedrooms: Number,
+      bathrooms: Number,
       size: Number,
       description: String,
-      location: {
-        street: String,
-        city: String,
-        zip: String
-      },
-      createdAt: String,
+      streetName: String,
+      city: String,
+      zip: String,
       constructionYear: Number,
       hasGarage: Boolean,
-      madeByMe: Boolean
     },
     handleSubmit: Function,
     buttonText: String
@@ -152,57 +167,64 @@
     streetName: {required: requiredFieldMissingValidator}, 
     houseNumber: {required: requiredFieldMissingValidator},
     numberAddition: '',
-    location: {
-      zip: {required: requiredFieldMissingValidator},
-      city: {required: requiredFieldMissingValidator}, 
-    },
     image: {required: requiredFieldMissingValidator},
+    zip: {required: requiredFieldMissingValidator},
+    city: {required: requiredFieldMissingValidator}, 
     price: {required: requiredFieldMissingValidator},
     size: {required: requiredFieldMissingValidator},
     hasGarage: {required: requiredFieldMissingValidator},
-    rooms: {
-      bedrooms: {required: requiredFieldMissingValidator},
-      bathrooms: {required: requiredFieldMissingValidator},
-    },
+    bedrooms: {required: requiredFieldMissingValidator},
+    bathrooms: {required: requiredFieldMissingValidator},
     constructionYear: {required: requiredFieldMissingValidator},
     description: {required: requiredFieldMissingValidator}
   };
 
   const formValidation = useVuelidate(rules, house)
 
-  function encodeImageFileAsURL(file: File) {
-    return new Promise(resolve => {
-        let reader = new FileReader();
-        reader.onloadend = function() {
-          resolve(reader.result)
-        }
-        reader.readAsDataURL(file);    
-    })
-  }
-
   async function submit(event: Event) {
     event.preventDefault();
     const valid = await formValidation.value.$validate();
+
     if (!valid) return
-    const {image, file, streetName, houseNumber, ...formData} = house;
-    console.log('image: ', image)
-    console.log('file: ', file)
+    const {
+      price,
+      houseNumber,
+      bedrooms,
+      bathrooms,
+      size,
+      description,
+      streetName,
+      city,
+      zip,
+      constructionYear,
+      hasGarage,
+      image,
+    } = house;
 
-    let houseImageFile
-    if (file === null) {
-      houseImageFile = image
+    const savedHouse = await props.handleSubmit({
+      price,
+      houseNumber,
+      bedrooms,
+      bathrooms,
+      size,
+      description,
+      streetName,
+      city,
+      zip,
+      constructionYear,
+      hasGarage,
+    }, image);
+    const file = house.file;
+   
+    if (file) {
+      await uploadImage(file, savedHouse.id);
     }
-    else {
-      houseImageFile = await encodeImageFileAsURL(file);
-    }
-
-    props.handleSubmit({...formData, image: houseImageFile, location: {...formData.location, street: `${streetName} ${houseNumber}`}, madeByMe: true})
+    router.push({name: DETAIL_PAGE, params: {id: savedHouse.id}});
   }
 
 </script>
 
 <style scoped>
-
   .form {
     display: flex;
     flex-direction: column;

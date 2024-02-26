@@ -4,21 +4,14 @@
 
     <input
       class="input"
-      :class="{ 'input--error': hasErrors }"
+      :class="{ 'input--error': errors.length > 0 }"
       type="text"
       v-bind="$attrs"
       :value="modelValue"
       @input="updateModelValue"
-      :aria-describedby="errorIds"
     />
 
-    <Paragraph
-      v-if="hasErrors"
-      variant="error-message"
-      v-for="error in errors"
-      :key="error.$uid"
-      :id="error.$uid"
-    >
+    <Paragraph variant="error-message" v-for="error in errors" :key="(error.$uid as any)">
       {{ error.$message }}
     </Paragraph>
   </div>
@@ -27,31 +20,23 @@
 <script setup lang="ts">
 import Paragraph from '@/components/atoms/typography/Paragraph.vue'
 import Label from '@/components/atoms/Label/Label.vue'
+import type { ErrorObject } from '@vuelidate/core'
 
-interface ErrorObject {
-  $uid: string;
-  $message: string;
-}
-
-interface Props {
-  label: string;
-  modelValue: string;
-  errors: ErrorObject[];
-  updateModel: (value: string) => void;
-}
-
-const props = defineProps<Props>()
-
-const { label, modelValue, errors, updateModel } = props
-
-const hasErrors = errors?.length > 0
+defineProps({
+  label: String,
+  modelValue: String,
+  errors: {
+    type: Array as () => ErrorObject[],
+    required: true,
+    default: []
+  },
+})
+const emit = defineEmits(['updateModel']);
 
 const updateModelValue = (event: Event) => {
   const inputValue = (event.target as HTMLInputElement).value;
-  updateModel(inputValue);
+  emit('updateModel', inputValue);
 }
-
-const errorIds = errors?.map((error) => error.$uid).join(' ')
 </script>
 
 <style scoped>

@@ -2,6 +2,7 @@ export type House = {
     id: number;
     price: number;
     size: number;
+    streetName: string;
     location: {
       street: string;
       houseNumber: string;

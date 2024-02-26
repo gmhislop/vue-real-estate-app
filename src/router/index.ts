@@ -35,12 +35,12 @@ const router = createRouter({
           component: CreatePage
         },
         {
-          path: ':id',
+          path: 'details/:id',
           name: DETAIL_PAGE,
           component: DetailPage
         },
         {
-          path: ':id/edit',
+          path: 'edit/:id',
           name: EDIT_PAGE,
           component: EditPage
         }

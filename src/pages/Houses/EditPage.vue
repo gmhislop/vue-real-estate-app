@@ -37,32 +37,26 @@
   
     let formValues = reactive({
       streetName: house.value?.location.street.split(' ')[0], 
-          houseNumber: house.value?.location.street.split(' ')[1],
-        image: house.value?.image,
-        price: house.value?.price,
-        rooms: {
-          bedrooms: house.value?.rooms.bedrooms,
-          bathrooms: house.value?.rooms.bathrooms,
-        },
-        size: house.value?.size,
-        description: house.value?.description,
-        location: {
-  
-          street: house.value?.location.street,
-          city: house.value?.location.city,
-          zip: house.value?.location.zip,
-        },
-        createdAt: house.value.createdAt,
-        constructionYear: house.value?.constructionYear,
-        hasGarage: house.value?.hasGarage,
-    }
-    ) 
+      houseNumber: house.value?.location.houseNumber,
+      numberAddition: house.value?.location?.houseNumberAddition || '',
+      image: house.value?.image,
+      price: house.value?.price,
+      bedrooms: house.value?.rooms.bedrooms,
+      bathrooms: house.value?.rooms.bathrooms,
+      size: house.value?.size,
+      description: house.value?.description,
+      city: house.value?.location.city,
+      zip: house.value?.location.zip,
+      createdAt: house.value.createdAt,
+      constructionYear: house.value?.constructionYear,
+      hasGarage: house.value?.hasGarage,
+    }) 
     const router = useRouter();
   
     async function handleSubmit(formData) {
-      console.log('id: ', house.value.id)
-      const savedHouse = await storeHouses.updateHouse(formData, house.value.id)
-      router.push({name: DETAIL_PAGE, params: {id: savedHouse.id}})
+      const savedHouse = await storeHouses.updateHouse(formData, house.value.id);
+      console.log(savedHouse)
+      return savedHouse;
     }
   
   </script>

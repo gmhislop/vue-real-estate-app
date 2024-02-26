@@ -29,27 +29,23 @@ defineProps({
         default: ''
     },
     errors: {
+        required: true,
         default: []
-    }
+    },
 })
 
-const emit = defineEmits(['update:previewImageUrl', 'update:imageFile'])
+const emit = defineEmits(['updateModel'])
 
 const clearImage = (event) => {
     event.preventDefault();
-    // Reset the preview image.
-    emit('update:previewImageUrl', '');
-    // Set value of the file input to null.
-    emit('update:imageFile', null);
+    emit('updateModel', '', null);
 }
 
 const displayPreviewImage = (event) => {
     if (!event.target.files[0]) return
     // Generate preview image. 
     const url = URL.createObjectURL(event.target.files[0])
-    // Emit the changes for v-model to update.
-    emit('update:previewImageUrl', url)
-    emit('update:imageFile', event.target.files[0]);
+    emit('updateModel', url, event.target.files[0]);
 }
 </script>
   

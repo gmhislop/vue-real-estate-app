@@ -10,7 +10,7 @@
 
       <div class="heading-container--desktop">
         <Heading class="page-title--mobile">Houses</Heading>
-        <RouterLink class="create-button-container" :to="{ name: CREATE_PAGE, params: { id: house?.id } }">
+        <RouterLink class="create-button-container" :to="{ name: CREATE_PAGE, params: { id: house?.id } }"  @click="() => storeHouses.selectHouseDelete(house?.id)">
           <button class="create-new-button">
             <img alt="White plus icon" class="plus-icon" src="@/assets/ic_plus_white@3x.png" />
             CREATE NEW

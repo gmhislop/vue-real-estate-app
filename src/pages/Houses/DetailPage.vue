@@ -31,7 +31,7 @@
       <div class="house-info">
         <Heading as='h2' class="subtitle">{{ house?.location.street }}</Heading>
         <div class="desktop-edit-delete" v-if="!mobile">
-          <RouterLink :to="{ name: EDIT_PAGE, params: { id: house?.id } }">
+          <RouterLink :to="{ name: EDIT_PAGE, params: { id: house?.id } }" @click="() => storeHouses.selectHouseDelete(house?.id)">
             <img alt="Edit icon" class="edit-icon" src="@/assets/ic_edit@3x.png"/>
           </RouterLink>
           <img 

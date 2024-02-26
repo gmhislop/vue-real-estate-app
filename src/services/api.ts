@@ -26,7 +26,7 @@ export const postHouse = async (house: House): Promise<House> => {
 };
 
 export const updateHouse = async (house: House, id: string): Promise<House> => {
-  const response: AxiosResponse<House> = await instance.patch(`/houses/${id}`, house, {
+  const response: AxiosResponse<House> = await instance.post(`/houses/${id}`, house, {
     headers: {
       'X-Api-Key': import.meta.env.VITE_API_KEY
     }
@@ -35,7 +35,11 @@ export const updateHouse = async (house: House, id: string): Promise<House> => {
 };
 
 export const deleteHouse = async (id: string): Promise<void> => {
-  await instance.delete(`/houses/${id}`);
+  await instance.delete(`/houses/${id}`, {
+    headers: {
+      'X-Api-Key': import.meta.env.VITE_API_KEY
+    }
+  });
 };
 
 export const uploadImage = async (image: File, houseId: string): Promise<void> => {

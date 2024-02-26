@@ -14,7 +14,8 @@ export const useHousesStore = defineStore({
     houses: [] as House[],
     search: '',
     sortBy: 'price' as keyof typeof sortingFunctions,
-    houseToDeleteId: null as number | null
+    houseToDeleteId: null as number | null,
+    houseToUpdateId: null as number | null,
   }),
   actions: {
     async fill(): Promise<House[]> { 
@@ -29,11 +30,11 @@ export const useHousesStore = defineStore({
         throw error;
       }
     },
-    async createHouse(house: House): Promise<House> {
+    async createHouse(house: House, image: string): Promise<House> {
       try {
         const savedHouse = await postHouse(house);
-        this.houses.push(savedHouse);
-        return savedHouse;
+        this.houses.push({...savedHouse, image});
+        return {...savedHouse, image};
       } catch (error: unknown) {
         console.error('Error creating house:', error);
         throw error;
@@ -41,10 +42,13 @@ export const useHousesStore = defineStore({
     },
     async updateHouse(house: House, id: number): Promise<House> {
       try {
+        this.houses = this.houses.map((h) => {
+          if (h.id === id) return house;
+          return h;
+        });
         await updateHouse(house, id as unknown as string);
-        const index = this.houses.findIndex(h => h.id === id);
-        if (index !== -1) this.houses.splice(index, 1, house);
-        return house;
+        this.houseToUpdateId = null; 
+        return { ...house, id };
       } catch (error: unknown) {
         console.error('Error updating house:', error);
         throw error;
@@ -55,6 +59,7 @@ export const useHousesStore = defineStore({
         if (!this.houseToDeleteId) return;
         await deleteHouse(this.houseToDeleteId as unknown as string);
         this.houses = this.houses.filter((house) => house.id !== this.houseToDeleteId);
+        await this.fill();
         this.houseToDeleteId = null;
       } catch (error: unknown) {
         console.error('Error deleting house:', error);
@@ -72,6 +77,9 @@ export const useHousesStore = defineStore({
       const sortedHouses = this.houses.slice().sort(sortingFunctions[sortOption]);
       this.houses = sortedHouses;
     },
+    selectHouseDelete(id: number | null): void {
+      this.houseToUpdateId = id;
+    },
     displayDeleteWarning(id: number): void {
       this.houseToDeleteId = id;
     },
@@ -82,13 +90,14 @@ export const useHousesStore = defineStore({
   getters: {
     houseDetails(): House | undefined {
       const route = useRoute();
-      const houseId = parseInt(route.params.id as string);
+      const houseId = route ? parseInt(route.params.id as string) : this.houseToDeleteId;
       return this.houses.find((house) => house.id === houseId);
     },
     filteredHouses(state): House[] {
       return state.houses.filter((house) => {
         const searchAttributes: (keyof typeof house.location)[] = ['street', 'city', 'zip'];
         const query = state.search.toLowerCase();
+        if (!house.location) return this.houses;
         return searchAttributes.some((attribute) => house.location[attribute].toLowerCase().includes(query));
       });
     },

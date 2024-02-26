@@ -1,9 +1,9 @@
 <template>
   <div class="background-image">
     <layout>
-      <RouterLink class="back-arrow-container" :to="{ name: DETAIL_PAGE}">
+      <RouterLink class="back-arrow-container" to="" @click="this.$router.go(-1)">
           <img alt="Back Arrow icon" class="back-arrow-icon" src="@/assets/ic_back_grey@3x.png" />
-          <p class="back-button-label">Back to detail page</p>
+          <p class="back-button-label">Back</p>
         </RouterLink>
       <section class="create-house-details">
         <Heading>Create new listing</Heading>
@@ -17,9 +17,7 @@
   import { useHousesStore } from '@/stores/houses'
   import Layout from '@/components/templates/Layout/Layout.vue';
   import Heading from '@/components/atoms/typography/Heading.vue';
-  import { useRouter } from 'vue-router';
   import HouseForm from '@/components/organisms/HouseForm/HouseForm.vue'
-  import { DETAIL_PAGE } from '@/router';
   
   const newHouse = {
     location: {
@@ -40,13 +38,11 @@
     constructionYear: '',
     description: ''
   }
-  
-  const router = useRouter();
   const storeHouses = useHousesStore();
   
   async function handleSubmit(formData, houseImageFile) {
-    const savedHouse = await storeHouses.createHouse(formData, houseImageFile)
-    router.push({name: DETAIL_PAGE, params: {id: savedHouse.id}})
+    const savedHouse = await storeHouses.createHouse(formData, houseImageFile);
+    return savedHouse;
   }
   </script>
   
